@@ -82,6 +82,21 @@ from dfa_lib_python.element import Element
 #task.begin()
 
 #task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['Validation_output'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['Validation_output'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['Validation_output'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
 #task_input = DataSet(dataflow_tag, [Element(['Validation_input'])])
 #task.add_dataset(task_input)
 #task.begin()
@@ -247,6 +262,21 @@ from dfa_lib_python.element import Element
 #task.begin()
 
 os.system('echo "*** executing mafft\n"')
+
+
+#task_output = DataSet(dataflow_tag, [Element(['file1024'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['file1024'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['file1024'])])
+#task.add_dataset(task_output)
+#task.end()
 
 
 #task_output = DataSet(dataflow_tag, [Element(['file1024'])])

@@ -184,6 +184,21 @@ from dfa_lib_python.element import Element
 #task.add_dataset(task_input)
 #task.begin()
 
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
+#task.add_dataset(task_input)
+#task.begin()
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", dest="file")
@@ -278,6 +293,21 @@ print("**** Programa executado: RemovePipe \nFile consumed: ",args.file)
 
 
 #task_output = DataSet(dataflow_tag, [Element(['Validation_input'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
 #task.add_dataset(task_output)
 #task.end()
 

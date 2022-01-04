@@ -746,8 +746,8 @@
 <Program rdf:about="#MrBayes">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
-  <hasInPort rdf:resource="#fileEvolutiveModel"/>
   <hasInPort rdf:resource="#fileConvertedAlignment"/>
+  <hasInPort rdf:resource="#fileEvolutiveModel"/>
   <hasMetadata rdf:resource="#sources/mrbayes.py"/>
   <hasMetadata rdf:resource="#-nr"/>
   <hasMetadata rdf:resource="#-nc"/>
