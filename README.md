@@ -122,6 +122,8 @@ An usage example of associateRelationAtt():
 associateRelationAtt(inputValidation, [sequence_input_att])
 ```
 
+![](./visualizations/relation_att.svg)
+
 #### To define concrete data instances (ProvONE branch):
 ```
 createPort(ontoexpline, "Port name")
