@@ -1,7 +1,6 @@
 import configparser, os
 from pathlib import Path
 
-
 cfg = configparser.ConfigParser()
 cfg.read('conf.ini')
 

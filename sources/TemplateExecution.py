@@ -20,7 +20,7 @@ def createTemplate(ontoexpline, program):
             print("ConfigurationParameter =>",meta.name)
             template = template+" "+meta.name+" "
             for val in meta.value:
-                template = template + val + ' {}'
+                template = template + val
                 conf_param.append(val)
 
         else:
