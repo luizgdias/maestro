@@ -1,8 +1,15 @@
 import configparser, os
 from pathlib import Path
 
+#cfg = configparser.ConfigParser()
+#cfg.read('conf.ini')
+
+path = Path(__file__)
+ROOT_DIR = path.parent.absolute()
+config_path = os.path.join(ROOT_DIR, "conf.ini")
+
 cfg = configparser.ConfigParser()
-cfg.read('conf.ini')
+cfg.read(config_path)
 
 validation_input = cfg.get('VALIDATION', 'in_file')
 alignment_input = cfg.get('ALIGNMENT', 'in_file')
