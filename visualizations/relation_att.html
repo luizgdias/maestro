@@ -56,8 +56,50 @@
                 
 
                 // parsing and collecting nodes and edges from the python
-                nodes = new vis.DataSet([{"borderWidthSelected": "3", "color": "#95C0F9", "group": 2, "id": "inputValidation", "label": "inputValidation", "shape": "box", "size": 20, "title": "inputValidation. Profile: Mandatory."}, {"color": "#FCF3CF", "group": 2, "id": "sequence_input_att", "label": "sequence_input_att", "shape": "box", "title": "[ontoexpline.sequence_input_att]"}, {"color": "#FCF3CF", "group": 2, "id": "attribute_2", "label": "attribute_2", "shape": "box", "title": "[ontoexpline.attribute_2]"}]);
-                edges = new vis.DataSet([{"arrows": "to", "color": "black", "from": "inputValidation", "label": "composedBy", "shape": "square", "to": "sequence_input_att", "weight": 50}, {"arrows": "to", "color": "black", "from": "inputValidation", "label": "composedBy", "shape": "square", "to": "attribute_2", "weight": 50}]);
+                nodes = new vis.DataSet([
+                                            {"borderWidthSelected": "3", 
+                                            "color": "#95C0F9", 
+                                            "group": 2, 
+                                            "id": "inputValidation", 
+                                            "label": "Rel_input_validation", 
+                                            "shape": "box", 
+                                            "size": 20, 
+                                            "title": "inputValidation. Profile: Mandatory."
+                                        }, {
+                                            "color": "#f99b5c", 
+                                            "group": 2, 
+                                            "id": "sequence_input_att", 
+                                            "label": "Input_Sequence", 
+                                            "shape": "box", 
+                                            "title": "[ontoexpline.sequence_input_att]"
+                                        }, {
+                                            "color": "#f99b5c", 
+                                            "group": 2, 
+                                            "id": "attribute_2", 
+                                            "label": "Attribute_2", 
+                                            "shape": "box", 
+                                            "title": "[ontoexpline.attribute_2]"
+                                        }
+                                    ]);
+                edges = new vis.DataSet([
+                                            {
+                                                "arrows": "to", 
+                                                "color": "black", 
+                                                "from": "inputValidation", 
+                                                "label": "composedBy", 
+                                                "shape": "square", 
+                                                "to": "sequence_input_att", 
+                                                "weight": 50
+                                            }, {
+                                                "arrows": "to", 
+                                                "color": "black", 
+                                                "from": "inputValidation", 
+                                                "label": "composedBy", 
+                                                "shape": "square", 
+                                                "to": "attribute_2", 
+                                                "weight": 50
+                                            }
+                                        ]);
 
                 // adding nodes and edges to the graph
                 data = {nodes: nodes, edges: edges};
@@ -124,7 +166,7 @@
 
         </script>
         <center>
-            <h4>The instance inputRelation is composed by two attribute instances: sequence_input_att and attribute_2.</h4>
+            <h4>Figure 2. The instance inputRelation is composed by two attribute instances: sequence_input_att and attribute_2.</h4>
         </center>
 
 

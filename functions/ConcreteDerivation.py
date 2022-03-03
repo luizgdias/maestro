@@ -1,3 +1,4 @@
+from functions.ProvenanceCalls import insertProspectiveCall
 from sources.TemplateExecution import createTemplate
 
 
@@ -11,9 +12,17 @@ def absWfToConcreteWf(ontoexpline, abs_wf, options):
     #
     # abs_wf.insert(0, list(wf_head)) #inserindo a primeira atividade do wf
 
+    #insere a tag do dataflow no arquivo com o modelo prospectivo
+    df = "df = Dataflow('df_tag')\n\n"
+    f = open("sources/prospectiveProvenance.py", "a+")
+    f.write(df)
+    f.close()
 
     #aa[0] guarda as atividades, aa[1] guarda as dependências de cada atividade
     for aa in abs_wf:
+
+        insertProspectiveCall(ontoexpline, aa)
+
         if (ontoexpline.Variant in aa[0].is_a):
             for op in options: #se a aa é variante e está dentro de op enviado via usuário, está coerente
                 if (aa[0] in op) and (op[1] in aa[0].executedBy):
