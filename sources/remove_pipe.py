@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import argparse
 import sys, os
+from time import *
 from optparse import OptionParser
 from dfa_lib_python.dataflow import Dataflow
 from dfa_lib_python.dependency import Dependency
@@ -13,6 +14,7 @@ from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 from dfa_lib_python.element import Element
+from time import sleep
 
 #task = Task(taskId, dataflow_tag, taskName)
 #task_input = DataSet(dataflow_tag, [Element(['File1023'])])
@@ -56,7 +58,6 @@ parser.add_argument("-f", dest="file")
 args = parser.parse_args()
 
 print("**** Programa executado: RemovePipe \nparâmetros consumidos: ",args.file)
-time.sleep(10)
 
 #task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
 #task.add_dataset(task_output)

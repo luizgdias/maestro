@@ -1,6 +1,9 @@
-import configparser, os, time
+import configparser, os
+from time import *
 from pathlib import Path
 from extractConfigParam import *
+from time import *
+
 
 print("++++++++++++++")
 

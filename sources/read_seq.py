@@ -10,6 +10,7 @@ from dfa_lib_python.set_type import SetType
 from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
+from time import *
 
 #task = Task(taskId, dataflow_tag, taskName)
 #task_input = DataSet(dataflow_tag, [Element(['file1024'])])
@@ -382,7 +383,6 @@ from dfa_lib_python.element import Element
 #task.begin()
 
 print("**** Programa executado: ReadSeq")
-time.sleep(10)
 
 
 #task_output = DataSet(dataflow_tag, [Element(['fileConvertedAlignment'])])

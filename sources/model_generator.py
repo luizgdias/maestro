@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import sys, os
+from time import *
 
 #task = Task(taskId, dataflow_tag, taskName)
 #task_input = DataSet(dataflow_tag, [Element(['file1024'])])
@@ -372,7 +373,6 @@ import sys, os
 #task.begin()
 
 print("**** Programa executado: ModelGenerator")
-time.sleep(100)
 
 #task_output = DataSet(dataflow_tag, [Element(['fileEvolutiveModel'])])
 #task.add_dataset(task_output)

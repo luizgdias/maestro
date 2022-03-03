@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 import os
 import argparse
+from time import *
+
 from dfa_lib_python.dataflow import Dataflow
 from dfa_lib_python.dependency import Dependency
 from dfa_lib_python.transformation import Transformation
@@ -39,7 +41,6 @@ parser.add_argument("-f", dest="file")
 args = parser.parse_args()
 
 print("**** Programa executado: Mafft \nparâmetros consumidos: ",args.file,"\n")
-time.sleep(10)
 
 
 #task_output = DataSet(dataflow_tag, [Element(['file1024'])])

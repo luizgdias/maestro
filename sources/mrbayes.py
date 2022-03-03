@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import argparse, json
+from time import *
+
 import sys, os
 from dfa_lib_python.dataflow import Dataflow
 from dfa_lib_python.dependency import Dependency
@@ -54,7 +56,6 @@ parser.add_argument("-rt", dest="rates_mrbayes")
 args = parser.parse_args()
 
 print("**** Programa executado: MrBayes \n parâmetros consumidos: ",args.file, args.nruns, args.nchains, args.burnin)
-time.sleep(100)
 #task_output = DataSet(dataflow_tag, [Element(['fileTree'])])
 #task.add_dataset(task_output)
 #task.end()
