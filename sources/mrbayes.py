@@ -37,6 +37,11 @@ from dfa_lib_python.element import Element
 #task.add_dataset(task_input)
 #task.begin()
 
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['fileConvertedAlignment', 'fileEvolutiveModel'])])
+#task.add_dataset(task_input)
+#task.begin()
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", dest="file")
 parser.add_argument("-nr", dest="nruns")
@@ -49,6 +54,11 @@ parser.add_argument("-rt", dest="rates_mrbayes")
 args = parser.parse_args()
 
 print("**** Programa executado: MrBayes \n parâmetros consumidos: ",args.file, args.nruns, args.nchains, args.burnin)
+time.sleep(100)
+#task_output = DataSet(dataflow_tag, [Element(['fileTree'])])
+#task.add_dataset(task_output)
+#task.end()
+
 
 #task_output = DataSet(dataflow_tag, [Element(['fileTree'])])
 #task.add_dataset(task_output)

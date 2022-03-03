@@ -4,8 +4,9 @@
 #task.add_dataset(task_input)
 #task.begin()
 
-print("**** Programa executado: ClustalW")
 
+print("**** Executando: ClustalW")
+time.sleep(10)
 #task_output = DataSet(dataflow_tag, [Element(['file1024'])])
 #task.add_dataset(task_output)
 #task.end()
