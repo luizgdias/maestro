@@ -28,8 +28,8 @@ rates_mrbayes = cfg.get('TREEGENERATOR', 'rates_mrbayes')
 print("++++++++++++++")
 
 
-os.system('/home/luiz/PycharmProjects/MaestroOO/sources/remove_pipe.py -f ' + validation_input)
-os.system('/home/luiz/PycharmProjects/MaestroOO/sources/mafft.py -f '+ alignment_input)
-os.system('/home/luiz/PycharmProjects/MaestroOO/sources/model_generator.py -f '+ modelgenerator_input)
-os.system('/home/luiz/PycharmProjects/MaestroOO/sources/read_seq.py -f '+ converter_input)
-os.system('/home/luiz/PycharmProjects/MaestroOO/sources/mrbayes.py -f ' + tree_generator +' -f fileEvolutiveModel -nr nruns -nc nchains -brn burnin -prt printfreq -ng ngen -rt value_rates_mrbayes')
+os.system('python3 remove_pipe.py -f ' + validation_input)
+os.system('python3 mafft.py -f '+ alignment_input)
+os.system('python3 model_generator.py -f '+ modelgenerator_input)
+os.system('python3 read_seq.py -f '+ converter_input)
+os.system('python3 mrbayes.py -f ' + tree_generator +' -f fileEvolutiveModel -nr nruns -nc nchains -brn burnin -prt printfreq -ng ngen -rt value_rates_mrbayes')
