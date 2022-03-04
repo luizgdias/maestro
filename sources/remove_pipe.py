@@ -16,40 +16,6 @@ from dfa_lib_python.element import Element
 from dfa_lib_python.element import Element
 from time import sleep
 
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
-
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
-
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
-
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
-
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
-
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
-
-#task = Task(taskId, dataflow_tag, taskName)
-#task_input = DataSet(dataflow_tag, [Element(['File1023'])])
-#task.add_dataset(task_input)
-#task.begin()
 
 os.system('echo "\n*** Executando RemovePipe..."')
 
@@ -58,38 +24,3 @@ parser.add_argument("-f", dest="file")
 args = parser.parse_args()
 
 print("**** Programa executado: RemovePipe \nparâmetros consumidos: ",args.file)
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
-
-#task_output = DataSet(dataflow_tag, [Element(['Validation_output'])])
-#task.add_dataset(task_output)
-#task.end()
-
