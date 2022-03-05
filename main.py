@@ -56,11 +56,11 @@ if __name__ == '__main__':
 
     # Atributo e porta de entrada
     sequences_input = createAttribute(ontoexpline, "Input_Validation_att")  # atributo sequencia de entrada
-    sequences_port = createPort(ontoexpline, "File1023")  # arquivo consumido pelo programa
+    sequences_port = createPort(ontoexpline, "INPUT_SEQUENCE")  # arquivo consumido pelo programa
 
     # atributo e porta de saída
     sequences_validated = createAttribute(ontoexpline, "Output_Validation_att")
-    sequences_validated_port = createPort(ontoexpline, "Validation_output")  # saída do programa
+    sequences_validated_port = createPort(ontoexpline, "VALIDATED_SEQUENCE")  # saída do programa
 
     # relações de I/O
     rel_input_validation = createRelation(ontoexpline, "Rel_Validation_In")  # relação de entrada
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_validation, [sequences_validated])
 
     # criando programa
-    remove_pipe = createProgram(ontoexpline, "Remove_Pipe", op_validation, "sources/remove_pipe.py")
+    remove_pipe = createProgram(ontoexpline, "Remove_Pipe", op_validation, "sources/programs/remove_pipe.py")
     associateProgramPort(remove_pipe, [sequences_port], [sequences_validated_port])
 
     # criando atividade
@@ -84,7 +84,7 @@ if __name__ == '__main__':
 
     # Atributo e porta de saida do alinhamento
     alignment = createAttribute(ontoexpline, "alignment_att")  # atributo sequencia de entrada
-    sequences_aligned_port = createPort(ontoexpline, "file1024")  # arquivo consumido pelo programa
+    sequences_aligned_port = createPort(ontoexpline, "SEQUENCES_ALIGNMENT")  # arquivo consumido pelo programa
 
     # relações de I/O
     rel_output_alignment = createRelation(ontoexpline, "Rel_Alignment_Out")
@@ -95,11 +95,14 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_alignment, [alignment])
 
     # criando programa
-    mafft = createProgram(ontoexpline, "Mafft", op_alignment, "sources/mafft.py")
+    mafft = createProgram(ontoexpline, "Mafft", op_alignment, "sources/programs/mafft.py")
     associateProgramPort(mafft, [sequences_validated_port], [sequences_aligned_port])
 
-    clustalw = createProgram(ontoexpline, "ClustalW", op_alignment, "sources/clustalw.py")
+    clustalw = createProgram(ontoexpline, "ClustalW", op_alignment, "sources/programs/clustalw.py")
     associateProgramPort(clustalw, [sequences_validated_port], [sequences_aligned_port])
+    clustalw_out_format = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-OUTPUT")
+    clustalw_out_format.value = ["OUTPUT"]
+    addMetadata(ontoexpline, clustalw, clustalw_out_format)
 
 
     associateProgramPort(remove_pipe, [sequences_port], [sequences_validated_port])
@@ -122,9 +125,11 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_evolutiveModel, [evolutiveModel_att])
 
     # criando programa
-    model_generator = createProgram(ontoexpline, "Model_Generator", op_model, "sources/model_generator.py")
-
+    model_generator = createProgram(ontoexpline, "Model_Generator", op_model, "sources/programs/model_generator.py")
     associateProgramPort(model_generator, [sequences_aligned_port], [evolutiveModel_port])
+    gamma_categories = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-gamma")
+    gamma_categories.value = ["GAMMA_CATEGORIES"]
+    addMetadata(ontoexpline, model_generator, gamma_categories)
 
     # criando atividade
     aa3 = createActivity(ontoexpline, "Atividade_Evolutive_Model", op_model, [rel_output_alignment],
@@ -133,7 +138,7 @@ if __name__ == '__main__':
 
     # Atributo e porta de saida do alinhamento
     converted_alignment_att = createAttribute(ontoexpline, "converted_alignment_att")  # atributo sequencia de entrada
-    converted_alignment_port = createPort(ontoexpline, "fileConvertedAlignment")  # arquivo consumido pelo programa
+    converted_alignment_port = createPort(ontoexpline, "CONVERTED_ALIGNMENT")  # arquivo consumido pelo programa
 
     # relações de I/O
     rel_output_converted_alignment = createRelation(ontoexpline, "Rel_Converted_Alignment_Out")
@@ -144,9 +149,9 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_converted_alignment, [converted_alignment_att])
 
     # criando programa
-    read_seq = createProgram(ontoexpline, "Read_Seq", op_conversion, "sources/read_seq.py")
+    read_seq = createProgram(ontoexpline, "Read_Seq", op_conversion, "sources/programs/read_seq.py")
 
-    associateProgramPort(read_seq, [sequences_aligned_port], [converted_alignment_port])
+    associateProgramPort(read_seq, [sequences_validated_port], [converted_alignment_port])
 
     # criando atividade
     aa4 = createActivity(ontoexpline, "Atividade_Sequences_Converter", op_conversion, [rel_output_alignment],
@@ -166,10 +171,10 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_tree_generator, [tree_att])
 
     # criando programa
-    raxml = createProgram(ontoexpline, "Raxml", op_tree, "sources/raxml.py")
+    raxml = createProgram(ontoexpline, "Raxml", op_tree, "sources/programs/raxml.py")
 
 
-    mrbayes = createProgram(ontoexpline, "MrBayes", op_tree, "sources/mrbayes.py")
+    mrbayes = createProgram(ontoexpline, "MrBayes", op_tree, "sources/programs/mrbayes.py")
     nruns = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-nr")
     nruns.value=["nruns"]
     nchains = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-nc")

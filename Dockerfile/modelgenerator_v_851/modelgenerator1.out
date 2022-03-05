@@ -1,0 +1,13 @@
+
+****Welcome to ModelGenerator v0.85****
+
+If you use ModelGenerator in your analysis, please cite:
+
+Thomas M Keane, Christopher J Creevey , Melissa M Pentony, Thomas J Naughton and James O McInerney (2006) Assessment of methods for amino acid matrix selection and their use on empirical data shows that ad hoc assumptions for choice of matrix are not justified, BMC Evolutionary Biology, 6:29
+
+http://www.biomedcentral.com/1471-2148/6/29
+
+Error: Number of gamma categories parameter is invalid
+
+ModelGenerator Startup Command:
+Usage: java -jar ModelGenerator alignment_file numGammaCategories

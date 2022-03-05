@@ -547,22 +547,66 @@
   <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rates_mrbayes</value>
 </Metadata>
 
+<Url rdf:about="#programs/remove_pipe.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/remove_pipe.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/mafft.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/clustalw.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/model_generator.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/read_seq.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/raxml.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Url rdf:about="#sources/programs/mrbayes.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Metadata rdf:about="#-OUTPUT">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OUTPUT</value>
+</Metadata>
+
+<Metadata rdf:about="#-gamma">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GAMMA_CATEGORIES</value>
+</Metadata>
+
 <Attribute rdf:about="#Input_Validation_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <wasAssociatedWith rdf:resource="#File1023"/>
+  <wasAssociatedWith rdf:resource="#INPUT_SEQUENCE"/>
 </Attribute>
 
-<Port rdf:about="#File1023">
+<Port rdf:about="#INPUT_SEQUENCE">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#Input_Validation_att"/>
 </Port>
 
 <Attribute rdf:about="#Output_Validation_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <wasAssociatedWith rdf:resource="#Validation_output"/>
+  <wasAssociatedWith rdf:resource="#VALIDATED_SEQUENCE"/>
 </Attribute>
 
-<Port rdf:about="#Validation_output">
+<Port rdf:about="#VALIDATED_SEQUENCE">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#Output_Validation_att"/>
 </Port>
@@ -583,9 +627,9 @@
 <Program rdf:about="#Remove_Pipe">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequencing_quality_control"/>
-  <hasInPort rdf:resource="#File1023"/>
-  <hasMetadata rdf:resource="#sources/remove_pipe.py"/>
-  <hasOutPort rdf:resource="#Validation_output"/>
+  <hasInPort rdf:resource="#INPUT_SEQUENCE"/>
+  <hasMetadata rdf:resource="#sources/programs/remove_pipe.py"/>
+  <hasOutPort rdf:resource="#VALIDATED_SEQUENCE"/>
   <implements rdf:resource="#Atividade_Validation"/>
 </Program>
 
@@ -601,10 +645,10 @@
 
 <Attribute rdf:about="#alignment_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <wasAssociatedWith rdf:resource="#file1024"/>
+  <wasAssociatedWith rdf:resource="#SEQUENCES_ALIGNMENT"/>
 </Attribute>
 
-<Port rdf:about="#file1024">
+<Port rdf:about="#SEQUENCES_ALIGNMENT">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#alignment_att"/>
 </Port>
@@ -621,18 +665,19 @@
 <Program rdf:about="#Mafft">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_operation_0292"/>
-  <hasInPort rdf:resource="#Validation_output"/>
-  <hasMetadata rdf:resource="#sources/mafft.py"/>
-  <hasOutPort rdf:resource="#file1024"/>
+  <hasInPort rdf:resource="#VALIDATED_SEQUENCE"/>
+  <hasMetadata rdf:resource="#sources/programs/mafft.py"/>
+  <hasOutPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
   <implements rdf:resource="#Atividade_Alignment"/>
 </Program>
 
 <Program rdf:about="#ClustalW">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_operation_0292"/>
-  <hasInPort rdf:resource="#Validation_output"/>
-  <hasMetadata rdf:resource="#sources/clustalw.py"/>
-  <hasOutPort rdf:resource="#file1024"/>
+  <hasInPort rdf:resource="#VALIDATED_SEQUENCE"/>
+  <hasMetadata rdf:resource="#sources/programs/clustalw.py"/>
+  <hasMetadata rdf:resource="#-OUTPUT"/>
+  <hasOutPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
   <implements rdf:resource="#Atividade_Alignment"/>
 </Program>
 
@@ -667,8 +712,9 @@
 <Program rdf:about="#Model_Generator">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_refinament_operation_2089"/>
-  <hasInPort rdf:resource="#file1024"/>
-  <hasMetadata rdf:resource="#sources/model_generator.py"/>
+  <hasInPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
+  <hasMetadata rdf:resource="#sources/programs/model_generator.py"/>
+  <hasMetadata rdf:resource="#-gamma"/>
   <hasOutPort rdf:resource="#fileEvolutiveModel"/>
   <implements rdf:resource="#Atividade_Evolutive_Model"/>
 </Program>
@@ -684,10 +730,10 @@
 
 <Attribute rdf:about="#converted_alignment_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <wasAssociatedWith rdf:resource="#fileConvertedAlignment"/>
+  <wasAssociatedWith rdf:resource="#CONVERTED_ALIGNMENT"/>
 </Attribute>
 
-<Port rdf:about="#fileConvertedAlignment">
+<Port rdf:about="#CONVERTED_ALIGNMENT">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#converted_alignment_att"/>
 </Port>
@@ -702,9 +748,9 @@
 <Program rdf:about="#Read_Seq">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_conversion_operation_0260"/>
-  <hasInPort rdf:resource="#file1024"/>
-  <hasMetadata rdf:resource="#sources/read_seq.py"/>
-  <hasOutPort rdf:resource="#fileConvertedAlignment"/>
+  <hasInPort rdf:resource="#VALIDATED_SEQUENCE"/>
+  <hasMetadata rdf:resource="#sources/programs/read_seq.py"/>
+  <hasOutPort rdf:resource="#CONVERTED_ALIGNMENT"/>
   <implements rdf:resource="#Atividade_Sequences_Converter"/>
 </Program>
 
@@ -737,8 +783,8 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
   <hasInPort rdf:resource="#fileEvolutiveModel"/>
-  <hasInPort rdf:resource="#file1024"/>
-  <hasMetadata rdf:resource="#sources/raxml.py"/>
+  <hasInPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
+  <hasMetadata rdf:resource="#sources/programs/raxml.py"/>
   <hasOutPort rdf:resource="#fileTree"/>
   <implements rdf:resource="#Atividade_Tree_Generation"/>
 </Program>
@@ -746,9 +792,9 @@
 <Program rdf:about="#MrBayes">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
-  <hasInPort rdf:resource="#fileConvertedAlignment"/>
+  <hasInPort rdf:resource="#CONVERTED_ALIGNMENT"/>
   <hasInPort rdf:resource="#fileEvolutiveModel"/>
-  <hasMetadata rdf:resource="#sources/mrbayes.py"/>
+  <hasMetadata rdf:resource="#sources/programs/mrbayes.py"/>
   <hasMetadata rdf:resource="#-nr"/>
   <hasMetadata rdf:resource="#-nc"/>
   <hasMetadata rdf:resource="#-brn"/>
@@ -766,9 +812,9 @@
   <rdf:type rdf:resource="#Variant"/>
   <executedBy rdf:resource="#Raxml"/>
   <executedBy rdf:resource="#MrBayes"/>
-  <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasInputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
   <hasInputRelation rdf:resource="#Rel_Converted_Alignment_Out"/>
+  <hasInputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
+  <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasOutputRelation rdf:resource="#Rel_Tree_Generator_Out"/>
 </Abstract_activity>
 

@@ -12,15 +12,13 @@ from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 
-
-
 os.system('echo "\n*** Executando Mafft..."')
 parser = argparse.ArgumentParser()
-parser.add_argument("-f", dest="file")
+parser.add_argument("-INFILE", dest="in_file")
+parser.add_argument("-OUTFILE", dest="out_file")
+
 args = parser.parse_args()
+print("**** Programa executado: Mafft \nparâmetros consumidos: ",args.in_file,args.out_file,"\n")
 
-print("**** Programa executado: Mafft \nparâmetros consumidos: ",args.file,"\n")
-
-
-
-
+os.system('mafft '+args.in_file+' > '+args.out_file)
+print("**** Programa executado: Mafft \nparâmetros consumidos: ",args.in_file,args.out_file,"\n")

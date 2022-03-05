@@ -62,7 +62,7 @@ def insertRetrospectiveCall(ontoexpline, program):
     '''Essa função separa o que é import do que é conteudo executável,
     depois de separar ela insere as chamadas de proveniencia deixando o arquivo com estrutura:
     imports, inicio da chamada de proveniencia, conteudo do script, final da chamada de proveniência.'''
-    originalProgram = open("sources/"+str(program.name).lower()+".py", "r")
+    originalProgram = open("sources/programs/"+str(program.name).lower()+".py", "r")
     originalContent = originalProgram.readlines()
 
     imports = []
@@ -73,7 +73,7 @@ def insertRetrospectiveCall(ontoexpline, program):
         else:
             content.append(line)
 
-    f = open("sources/"+str(program.name).lower()+".py", "w")
+    f = open("sources/programs/"+str(program.name).lower()+".py", "w")
     for line in imports:
         f.write(str(line))
 
