@@ -52,6 +52,9 @@ To compose the third module, we used [ProvONE](http://jenkins-1.dataone.org/jenk
 The last module is the OntoExpLine Metadata branch composed by [Dublin Core](https://www.dublincore.org/specifications/dublin-core/usageguide/elements/).  Metadata represents a category of data used to describe data and in workflow describe the experiment elements such as resources, services, dependencies, consumed/generated data, etc. In `MAESTRO`, we used the Dublin Core data model, composed of fifteen elements and characterized mainly because of the ease of use and adaptability to different description levels.
 
 ### Module II - Provenance Tool: DfAnalyzer
+[DfAnalyzer](https://dl.acm.org/doi/abs/10.14778/3229863.3236265?casa_token=eqMi7Lvv5TwAAAAA:S2nFreuByjO0a7QNj_7oKrdmLdUj_KUmkSpLaFwxYyO6Qrntno-fpLOScyOURp563zMAAd4IQHRk) is a tool that aims to provide dataflow analysis to scientific applications. The architecture comprises five components: 
+ **Provenance Data Extractor** (PDE): Based on HTTP requests, capture provenance and data from scientific codes or workflows based on Scientific Workflows Manage Systems. **Raw Data Extractor**: a binary component that accesses files and extracts data. **Raw Data Indexer**: a component that indexes raw data to reduce the volume of data. **DfViewer**: the component that provides a graphical dataflow visualization from the specification. Query interface: a component that provides SQL-based queries to query stored data.
+ 
 #### Prospective Provenance
 #### Retrospective Provenance
 
