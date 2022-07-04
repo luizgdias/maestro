@@ -1,3 +1,5 @@
+import os
+
 from dfa_lib_python.dataflow import Dataflow
 from dfa_lib_python.dataflow import Dataflow
 from dfa_lib_python.dependency import Dependency
@@ -58,45 +60,53 @@ def insertProspectiveCall(ontoexpline, activity):
     f.close()
 
 
-def insertRetrospectiveCall(ontoexpline, program):
+def insertRetrospectiveCall(ontoexpline, program, source):
     '''Essa função separa o que é import do que é conteudo executável,
     depois de separar ela insere as chamadas de proveniencia deixando o arquivo com estrutura:
     imports, inicio da chamada de proveniencia, conteudo do script, final da chamada de proveniência.'''
-    originalProgram = open("sources/programs/"+str(program.name).lower()+".py", "r")
-    originalContent = originalProgram.readlines()
+    if (False in program.hasRetrospectiveCall):
+        #procura o metadado referente ao arquivo py que vai executar a atividade e insere as chamadas de proveniencia
+        # print("meta name:", source)
+        originalProgram = open(source, "r")
+        print("|*** Inserting DfAnalyzer retrospective calls on: ", source, ". In:", os.path.basename(__file__))
+        print("|*** Using program: ", program, " to run: ", source,"\n")
 
-    imports = []
-    content = []
-    for line in originalContent:
-        if ((("#!/usr/bin/python3") in line) or (("import") in line)):
-            imports.append(line)
-        else:
-            content.append(line)
+        originalContent = originalProgram.readlines()
 
-    f = open("sources/programs/"+str(program.name).lower()+".py", "w")
-    for line in imports:
-        f.write(str(line))
+        imports = []
+        content = []
+        for line in originalContent:
+            if ((("#") in line) or (("import") in line)) :
+                imports.append(line)
+            else:
+                content.append(line)
 
-    inports = []
-    for i in program.hasInPort:
-        inports.append(i.name)
+        f = open(source, "w")
+        for line in imports:
+            f.write(str(line))
 
-    provenance_start = "#task = Task(taskId, dataflow_tag, taskName)\n" +\
-            "#task_input = DataSet(dataflow_tag, [Element("+str(inports)+")])\n"+\
-            "#task.add_dataset(task_input)\n"+\
-            "#task.begin()"
+        inports = []
+        for i in program.hasInPort:
+            inports.append(i.name)
 
-    f.write(str("\n"+provenance_start+"\n"))
+        provenance_start = "#task = Task(taskId, dataflow_tag, taskName)\n" +\
+                "#task_input = DataSet(dataflow_tag, [Element("+str(inports)+")])\n"+\
+                "#task.add_dataset(task_input)\n"+\
+                "#task.begin()"
 
-    for line in content:
-        f.write(str(line))
-    outports = []
-    for i in program.hasOutPort:
-        outports.append(i.name)
+        f.write(str("\n"+provenance_start+"\n"))
 
-    provenance_end =    "#task_output = DataSet(dataflow_tag, [Element("+str(outports)+")])\n"+\
-                        "#task.add_dataset(task_output)\n" +\
-                        "#task.end()\n"
+        for line in content:
+            f.write(str(line))
+        outports = []
+        for i in program.hasOutPort:
+            outports.append(i.name)
 
-    f.write(str("\n"+provenance_end+"\n"))
-    f.close()
+        provenance_end =    "#task_output = DataSet(dataflow_tag, [Element("+str(outports)+")])\n"+\
+                            "#task.add_dataset(task_output)\n" +\
+                            "#task.end()\n"
+
+        f.write(str("\n"+provenance_end+"\n"))
+        f.close()
+        program.hasRetrospectiveCall = [True]
+        ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")

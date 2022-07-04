@@ -12,6 +12,11 @@ from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
 os.system('echo "\n*** Executando Mafft..."')
 parser = argparse.ArgumentParser()
 parser.add_argument("-INFILE", dest="in_file")
@@ -22,3 +27,8 @@ print("**** Programa executado: Mafft \nparâmetros consumidos: ",args.in_file,a
 
 os.system('mafft '+args.in_file+' > '+args.out_file)
 print("**** Programa executado: Mafft \nparâmetros consumidos: ",args.in_file,args.out_file,"\n")
+
+#task_output = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
+#task.add_dataset(task_output)
+#task.end()
+

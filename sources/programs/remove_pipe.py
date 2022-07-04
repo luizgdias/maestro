@@ -16,13 +16,38 @@ from dfa_lib_python.element import Element
 from dfa_lib_python.element import Element
 from time import sleep
 
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['INPUT_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['INPUT_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['INPUT_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['INPUT_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['INPUT_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
 os.system('echo "\n*** Executando RemovePipe..."')
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", dest="file")
 args = parser.parse_args()
 
-validated = open("/home/luiz/PycharmProjects/MaestroOO/sources/input/VALIDATED_SEQUENCE", "a")
+validated = open("/home/luiz/PycharmProjects/MaestroOO/sources/input/VALIDATED_SEQUENCE", "w")
 f = open(str(args.file), "r")
 
 lines_seen_so_far = set()
@@ -33,3 +58,28 @@ for line in f:
 validated.close()
 f.close()
 print("**** Programa executado: RemovePipe \nparâmetros consumidos: ",args.file)
+
+#task_output = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_output)
+#task.end()
+

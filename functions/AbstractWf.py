@@ -1,4 +1,6 @@
 import json
+import os
+
 
 def verifyCompatibility(a, activities):
     dependency = []
@@ -43,8 +45,8 @@ def absWfDependences(ontoexpline, activities):
                     dependences = []
 
         abs_wf.append(act_dependences)
-    print(abs_wf)
-    print(valid_wf)
+    # print(abs_wf)
+    print("|*** ABS Wf is: ",valid_wf,". Starting concrete instantiation... In: " , os.path.basename(__file__))
     return(abs_wf)
 
 def isValid(ontoexpline, activities):
@@ -55,9 +57,12 @@ def isValid(ontoexpline, activities):
             for dep in relation.generatedBy:
                 if dep in activities:
                     verify = True
+                    # print("|*** ABS Wf is: ", verify, ". Starting concrete instantiation...")
                 else:
                     verify = False
-                    return verify
+                    print("|*** ABS Wf is: ", verify,". Exiting MAESTRO...")
+                    exit(0)
+                    # return verify
     return verify
 
 def getAbsWf(ontoexpline, activities):

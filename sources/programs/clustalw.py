@@ -12,6 +12,26 @@ from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
+#task = Task(taskId, dataflow_tag, taskName)
+#task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task.add_dataset(task_input)
+#task.begin()
+
 os.system('echo "\n*** Executando CLUSTALW..."')
 parser = argparse.ArgumentParser()
 parser.add_argument("-in", dest="in_file")
@@ -21,3 +41,23 @@ args = parser.parse_args()
 #obs: o diretório do arquivo phylip de saida e sempre o mesmo do diretorio da entrada!!!!!
 os.system('clustalw -INFILE='+args.in_file+' -OUTPUT='+args.out_format)
 print("**** Programa executado: CLUSTALW \nparâmetros consumidos: ",args.in_file, args.out_format,"\n")
+
+#task_output = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
+#task.add_dataset(task_output)
+#task.end()
+
+
+#task_output = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
+#task.add_dataset(task_output)
+#task.end()
+

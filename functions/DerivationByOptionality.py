@@ -15,7 +15,7 @@ def searchPrograms(wf):
         # for program in aa[0].executedBy:
             # print(program.name, program.hasInPort, program.hasOutPort)
 
-def abstractDerivationByOptionality(ontoexpline, atividadesVariantes):
+def abstractDerivationByOptionality(ontoexpline):
     aa = ontoexpline.search(type= ontoexpline.Mandatory) #conjunto de atividades obrigatórias
     opt = ontoexpline.search(is_a= ontoexpline.Optional) #conjunto de atividades opcionais
     rel = ontoexpline.search(type = ontoexpline.Relation) #conjunto de relações
@@ -52,8 +52,4 @@ def abstractDerivationByOptionality(ontoexpline, atividadesVariantes):
         # print(abs_wf)
 
     searchPrograms(abs_wf)
-
-def deriveByOptionality(onto, variantActivities):
-    for aa in variantActivities:
-        print(aa[0], aa[1])
 
