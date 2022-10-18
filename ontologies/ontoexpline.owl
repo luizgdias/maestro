@@ -740,6 +740,31 @@
   <rdf:type rdf:resource="#Configuration_Parameter"/>
 </Metadata>
 
+<Metadata rdf:about="#sources/activities/act_validation.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
+<Metadata rdf:about="#sources/activities/act_alinhamento.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
+<Metadata rdf:about="#sources/activities/act_evolutive_model.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
+<Metadata rdf:about="#sources/activities/act_conversion.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
+<Metadata rdf:about="#sources/activities/act_treegenerator.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
 <Attribute rdf:about="#Input_Validation_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#INPUT_SEQUENCE"/>
@@ -795,7 +820,7 @@
   <rdf:type rdf:resource="#First"/>
   <executedBy rdf:resource="#remove_pipe"/>
   <hasInputRelation rdf:resource="#Rel_Validation_In"/>
-  <hasMetadata rdf:resource="#sources/programs/act_validation.py"/>
+  <hasMetadata rdf:resource="#sources/activities/act_validation.py"/>
   <hasOutputRelation rdf:resource="#Rel_Validation_Out"/>
 </Abstract_activity>
 
@@ -854,7 +879,7 @@
   <executedBy rdf:resource="#mafft"/>
   <executedBy rdf:resource="#clustalw"/>
   <hasInputRelation rdf:resource="#Rel_Validation_Out"/>
-  <hasMetadata rdf:resource="#sources/programs/act_alinhamento.py"/>
+  <hasMetadata rdf:resource="#sources/activities/act_alinhamento.py"/>
   <hasOutputRelation rdf:resource="#Rel_Alignment_Out"/>
 </Abstract_activity>
 
@@ -896,7 +921,7 @@
   <rdf:type rdf:resource="#Mandatory"/>
   <executedBy rdf:resource="#modelgenerator"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasMetadata rdf:resource="#sources/programs/act_evolutive_model.py"/>
+  <hasMetadata rdf:resource="#sources/activities/act_evolutive_model.py"/>
   <hasOutputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
 </Abstract_activity>
 
@@ -936,7 +961,7 @@
   <rdf:type rdf:resource="#Optional"/>
   <executedBy rdf:resource="#read_seq"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasMetadata rdf:resource="#sources/programs/act_conversion.py"/>
+  <hasMetadata rdf:resource="#sources/activities/act_conversion.py"/>
   <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out"/>
 </Abstract_activity>
 
@@ -1001,7 +1026,7 @@
   <executedBy rdf:resource="#mrbayes"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasInputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
-  <hasMetadata rdf:resource="#sources/programs/act_treegenerator.py"/>
+  <hasMetadata rdf:resource="#sources/activities/act_treegenerator.py"/>
   <hasOutputRelation rdf:resource="#Rel_Tree_Generator_Out"/>
 </Abstract_activity>
 

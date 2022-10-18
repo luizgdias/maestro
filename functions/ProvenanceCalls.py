@@ -12,53 +12,58 @@ from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 
-def insertProspectiveCall(ontoexpline, activity):
+def insertProspectiveCall(ontoexpline, abs_wf):
 
-    df = Dataflow("tag_qualquer")
-
-    print("PROSPECTIVE CALL TO: ",activity)
-    # tf = Transformation(activity.name)
-    # tf_input = Set(activity.name, SetType.INPUT,
-    #                 [Attribute("Alignmt", AttributeType.TEXT),
-    #                  Attribute("Trimmer", AttributeType.TEXT),
-    #                  Attribute("Program", AttributeType.TEXT)])
-    # tf_output = Set(activity.name, SetType.OUTPUT,
-    #                  [Attribute("Alignmt", AttributeType.TEXT),
-    #                   Attribute("Trimmer", AttributeType.TEXT),
-    #                   Attribute("Program", AttributeType.TEXT)])
-    # tf.set_sets([tf_input, tf_output])
-    # df.add_transformation(tf)
-
-    df = "df = Dataflow('df_tag')\n"
-    input_attributes = ""
-    output_attributes = ""
-
-    #captura os atributos de entrada da atividade para definir como atributos da dfanalyzer
-    for in_rel in activity[0].hasInputRelation:
-        for in_att in in_rel.composedBy:
-            input_attributes = input_attributes+"Attribute("+in_att.name+", AttributeType.TEXT)"
-
-    #captura os atributos de saida da atividade para definir como atributos da dfanalyzer
-    for out_rel in activity[0].hasOutputRelation:
-        for out_att in out_rel.composedBy:
-            output_attributes = output_attributes+"Attribute("+out_att.name+", AttributeType.TEXT)"
-
-
-    prospectiveCall = "tf_"+str(activity[0].name)+" = Transformation("+str(activity[0].name)+")\n" +\
-                      "tf_"+str(activity[0].name)+"_input = Set("+str(activity[0].name)+", SetType.INPUT,\n" +\
-                      "["+input_attributes+"])\n" + \
-                      "tf_"+str(activity[0].name)+"_output = Set(activity.name, SetType.OUTPUT,\n"+\
-                      "[Attribute('Alignmt', AttributeType.TEXT),\n" +\
-                      "["+output_attributes+"])\n" + \
-                      "tf_"+str(activity[0].name)+".set_sets([tf_"+str(activity[0].name)+"_input, tf_"+str(activity[0].name)+"_output])\n" +\
-                      "df.add_transformation(tf_"+str(activity[0].name)+")\n\n"
-
-
+    df = "df = Dataflow('df_tag')\n\n"
     f = open("sources/prospectiveProvenance.py", "a+")
-    # f.write(df)
-    f.write(prospectiveCall)
-    f.close()
 
+    #limpando o arquivo que contém o modelo de dados de proveniência (prospectiveProvenance.py)
+    if not(os.path.getsize("sources/prospectiveProvenance.py") == 0):
+        print("prospectiveProvenance file is not empty! Cleaning file..")
+        file_to_delete = open("sources/prospectiveProvenance.py", 'w')
+        file_to_delete.write("")
+        file_to_delete.close()
+
+    #inserindo a tag do dataflow
+    f.write(df)
+
+    for activity in abs_wf:
+        print("PROSPECTIVE CALL ABOUT: ",activity)
+        # tf = Transformation(activity.name)
+        # tf_input = Set(activity.name, SetType.INPUT,
+        #                 [Attribute("Alignmt", AttributeType.TEXT),
+        #                  Attribute("Trimmer", AttributeType.TEXT),
+        #                  Attribute("Program", AttributeType.TEXT)])
+        # tf_output = Set(activity.name, SetType.OUTPUT,
+        #                  [Attribute("Alignmt", AttributeType.TEXT),
+        #                   Attribute("Trimmer", AttributeType.TEXT),
+        #                   Attribute("Program", AttributeType.TEXT)])
+        # tf.set_sets([tf_input, tf_output])
+        # df.add_transformation(tf)
+
+        input_attributes = ""
+        output_attributes = ""
+
+        #captura os atributos de entrada da atividade para definir como atributos da dfanalyzer
+        for in_rel in activity[0].hasInputRelation:
+            for in_att in in_rel.composedBy:
+                input_attributes = input_attributes+"Attribute("+in_att.name+", AttributeType.TEXT)"
+
+        #captura os atributos de saida da atividade para definir como atributos da dfanalyzer
+        for out_rel in activity[0].hasOutputRelation:
+            for out_att in out_rel.composedBy:
+                output_attributes = output_attributes+"Attribute("+out_att.name+", AttributeType.TEXT)"
+
+        prospectiveCall = "tf_"+str(activity[0].name)+" = Transformation("+str(activity[0].name)+")\n" +\
+                          "tf_"+str(activity[0].name)+"_input = Set("+str(activity[0].name)+", SetType.INPUT,\n" +\
+                          "["+input_attributes+"])\n" + \
+                          "tf_"+str(activity[0].name)+"_output = Set("+str(activity[0].name)+", SetType.OUTPUT,\n"+\
+                          "[Attribute('Alignmt', AttributeType.TEXT),\n" +\
+                          "["+output_attributes+"])\n" + \
+                          "tf_"+str(activity[0].name)+".set_sets([tf_"+str(activity[0].name)+"_input, tf_"+str(activity[0].name)+"_output])\n" +\
+                          "df.add_transformation(tf_"+str(activity[0].name)+")\n\n"
+        f.write(prospectiveCall)
+    f.close()
 
 def insertRetrospectiveCall(ontoexpline, program, source):
     '''Essa função separa o que é import do que é conteudo executável,

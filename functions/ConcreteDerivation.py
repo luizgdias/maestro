@@ -10,7 +10,6 @@ def verifyMatchBetweenAbstractAndConcreteItems(ontoexpline, abs_wf, options):
     relations = []
     ports_associated_with_attributes = []
 
-
     for program in options:
         print(program[1])
         for port in program[1].hasInPort:
@@ -26,8 +25,6 @@ def verifyMatchBetweenAbstractAndConcreteItems(ontoexpline, abs_wf, options):
                     ports_associated_with_attributes.append(p)
             relations.append(relation)
     # print(relations)
-
-    # print("Portas consumidas pelas atividades do wf: ",ports_associated_with_attributes)
 
     #faz a varredura nas portas consumidas pelos programas variantes
     for port in consumedPorts:
@@ -56,10 +53,9 @@ def absWfToConcreteWf(ontoexpline, abs_wf, options):
     print("|*** Creating concrete workflow using: ", options," as options...")
     print("|*** Executing: ", os.path.basename(__file__))
 
-    # df = "df = Dataflow('df_tag')\n\n"
-    # f = open("sources/prospectiveProvenance.py", "a+")
-    # f.write(df)
-    # f.close()
+    print("\n|*** Inserting DfAnalyzer Prospective Model in prospectiveProvenance.py...: ")
+    #insere o modelo prospectivo em prospectiveProvence.py
+    insertProspectiveCall(ontoexpline, abs_wf)
 
     #aa[0] guarda as atividades, aa[1] guarda as dependências de cada atividade
     for aa in abs_wf:

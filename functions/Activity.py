@@ -5,9 +5,9 @@ from functions.Metadata import createMetadata, addMetadata
 
 def createActivityTemplate(ontoexpline, activity):
     print("|*** Creating template (py file) to: ", activity, " activity. Executing: ", os.path.basename(__file__)+"\n")
-    f = open("sources/programs/act_"+activity+".py", "w")
+    f = open("sources/activities/act_"+activity+".py", "w")
     f.close()
-    source = "sources/programs/act_"+activity+".py"
+    source = "sources/activities/act_"+activity+".py"
     return source
 
 
