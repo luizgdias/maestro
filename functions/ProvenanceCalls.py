@@ -73,6 +73,8 @@ def insertRetrospectiveCall(ontoexpline, program, source):
         #procura o metadado referente ao arquivo py que vai executar a atividade e insere as chamadas de proveniencia
         # print("meta name:", source)
         originalProgram = open(source, "r")
+        retrospectiveProvenanceFile = open("/home/luiz/PycharmProjects/MaestroOO/sources/retrospectiveProvenance.py", "a")
+
         print("|*** Inserting DfAnalyzer retrospective calls on: ", source, ". In:", os.path.basename(__file__))
         print("|*** Using program: ", program, " to run: ", source,"\n")
 
@@ -100,6 +102,9 @@ def insertRetrospectiveCall(ontoexpline, program, source):
                 "#task.begin()"
 
         f.write(str("\n"+provenance_start+"\n"))
+        retrospectiveProvenanceFile.write(str("\n"+provenance_start+"\n"))
+
+
 
         for line in content:
             f.write(str(line))
@@ -112,6 +117,10 @@ def insertRetrospectiveCall(ontoexpline, program, source):
                             "#task.end()\n"
 
         f.write(str("\n"+provenance_end+"\n"))
+        retrospectiveProvenanceFile.write(str("\n"+provenance_end+"\n"))
+
         f.close()
+        retrospectiveProvenanceFile.close()
+
         program.hasRetrospectiveCall = [True]
         ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")

@@ -318,7 +318,6 @@ with ontoexpline:
     class Equivalence(ontoexpline.Entity):
         equivalent_to = [ontoexpline.Abstract_activity and (ontoexpline.hasInputRelation.some(ontoexpline.Relation and ontoexpline.composedBy.value(ontoexpline.alignment_att))) and (ontoexpline.hasOutputRelation.some(ontoexpline.Relation and ontoexpline.composedBy.value(converted_alignment_att_eq)))]
 
-
     ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
     # close_world(Thing)
 
