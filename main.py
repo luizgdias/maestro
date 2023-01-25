@@ -3,6 +3,8 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for functions, files, tool windows, actions, and settings.
 import os
+
+import owlready2
 from owlready2 import *
 import subprocess
 import os, sys, re, shutil as sh, optparse, time, datetime, threading
@@ -163,13 +165,17 @@ if __name__ == '__main__':
     converted_alignment_att = createAttribute(ontoexpline, "converted_alignment_att")  # atributo sequencia de entrada
     converted_alignment_port = createPort(ontoexpline, "CONVERTED_ALIGNMENT")  # arquivo consumido pelo programa
 
+    # atributo para a relação de equivalencia
+    converted_alignment_att_eq = createAttribute(ontoexpline, "converted_alignment_att_eq")  # atributo sequencia de entrada
+
     # relações de I/O
     rel_output_converted_alignment = createRelation(ontoexpline, "Rel_Converted_Alignment_Out")
+    rel_output_converted_alignment_eq = createRelation(ontoexpline, "Rel_Converted_Alignment_Out_eq")
 
     # associações de itens abstratos e concretos
     associatePortAtt(converted_alignment_att, converted_alignment_port)  # associando att na porta
 
-    associateRelationAtt(rel_output_converted_alignment, [converted_alignment_att])
+    associateRelationAtt(rel_output_converted_alignment, [converted_alignment_att, converted_alignment_att_eq])
 
     # criando programa
     read_seq = createProgram(ontoexpline, "read_seq", op_conversion, "sources/SciPhy/cgi-bin/arpa.py")
@@ -183,6 +189,10 @@ if __name__ == '__main__':
     # criando atividade
     aa4 = createActivity(ontoexpline, "conversion", op_conversion, [rel_output_alignment],
                          [rel_output_converted_alignment], True, [read_seq], False)
+
+    #criando equivalencia para teste
+    aa_equivalence = createActivity(ontoexpline, "eq_conversion", op_conversion, [rel_output_alignment],
+                         [rel_output_converted_alignment_eq], True, [read_seq], False)
     ###################################################################################################################
 
     # Atributo e porta de saida do alinhamento
@@ -298,3 +308,18 @@ absWfToConcreteWf(ontoexpline, abs_wf, [[aa2, clustalw], [aa5, mrbayes]])
 # getAttributeGeneratedByProgram(Att) -> retorna os programas que geram (relacionados) um atributo (retorna lista) - check
 # getAttributeConsumedByProgram(program) -> retornam atributos consumidos (relacionados) por um programa (retorna lista) - check
 # getProgramCompatibilities(Program) -> retorna programas que geram dados para o programa x, e programas que consomem dados gerados pelo programa x (retorna dicionario) - check
+
+# cleanOntology(ontoexpline)
+# ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
+# Abstract_activity and (hasInputRelation some (Relation and composedBy value alignment_att)) and (hasOutputRelation some (Relation and composedBy value atribuxo_x or composedBy value evolutiveModel_att))
+owlready2.JAVA_EXE = "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
+ontoexpline = get_ontology("ontologies/ontoexpline.owl").load()
+with ontoexpline:
+    class Equivalence(ontoexpline.Entity):
+        equivalent_to = [ontoexpline.Abstract_activity and (ontoexpline.hasInputRelation.some(ontoexpline.Relation and ontoexpline.composedBy.value(ontoexpline.alignment_att))) and (ontoexpline.hasOutputRelation.some(ontoexpline.Relation and ontoexpline.composedBy.value(converted_alignment_att_eq)))]
+
+
+    ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
+    # close_world(Thing)
+
+    sync_reasoner()

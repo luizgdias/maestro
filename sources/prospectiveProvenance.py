@@ -32,7 +32,7 @@ tf_conversion_input = Set(conversion, SetType.INPUT,
 [Attribute(alignment_att, AttributeType.TEXT)])
 tf_conversion_output = Set(conversion, SetType.OUTPUT,
 [Attribute('Alignmt', AttributeType.TEXT),
-[Attribute(converted_alignment_att, AttributeType.TEXT)])
+[Attribute(converted_alignment_att, AttributeType.TEXT)Attribute(converted_alignment_att_eq, AttributeType.TEXT)])
 tf_conversion.set_sets([tf_conversion_input, tf_conversion_output])
 df.add_transformation(tf_conversion)
 

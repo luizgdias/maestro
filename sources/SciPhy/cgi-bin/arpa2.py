@@ -379,6 +379,7 @@ def main():
   t1_input = DataSet("iValidationModule_"+dataflow_tag, [Element([alignment, trimmer, program])])
   t1.add_dataset(t1_input)
   t1.begin()
+
   print "alinhamento: "+alignment
   tipo_alinhamento = validate_parametersA(alignment) #atividade sciphy
   tipo_trimmer = validate_parametersT(trimmer)

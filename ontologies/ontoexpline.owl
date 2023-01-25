@@ -243,8 +243,7 @@
 </owl:Class>
 
 <owl:Class rdf:about="#Experiment_Line">
-  <owl:disjointWith rdf:resource="#Metadata"/>
-  <owl:disjointWith rdf:resource="#ProvOne"/>
+  <rdfs:subClassOf rdf:resource="#Entity"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Collection">
@@ -325,7 +324,7 @@
 <owl:Class rdf:about="#ProvOne"/>
 
 <owl:Class rdf:about="#Metadata">
-  <owl:disjointWith rdf:resource="#ProvOne"/>
+  <rdfs:subClassOf rdf:resource="#Entity"/>
 </owl:Class>
 
 <owl:Class rdf:about="http://edamontology.org/data_0006">
@@ -334,21 +333,22 @@
 
 <owl:Class rdf:about="#Bio">
   <rdfs:subClassOf rdf:resource="#Domain_Operation"/>
-  <owl:disjointWith rdf:resource="#Metadata"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Domain_Operation"/>
+<owl:Class rdf:about="#Domain_Operation">
+  <rdfs:subClassOf rdf:resource="#Entity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#A_Type">
+  <rdfs:subClassOf rdf:resource="#Entity"/>
+</owl:Class>
 
 <owl:Class rdf:about="#Activity_Domain_Type">
-  <rdfs:subClassOf rdf:resource="#Type"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Type">
-  <rdfs:subClassOf rdf:resource="#Experiment_Line"/>
+  <rdfs:subClassOf rdf:resource="#A_Type"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Activity_Type">
-  <rdfs:subClassOf rdf:resource="#Type"/>
+  <rdfs:subClassOf rdf:resource="#A_Type"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Configuration_Parameter">
@@ -373,7 +373,7 @@
 </owl:Class>
 
 <owl:Class rdf:about="#First">
-  <rdfs:subClassOf rdf:resource="#Type"/>
+  <rdfs:subClassOf rdf:resource="#A_Type"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Mandatory">
@@ -447,323 +447,20 @@
   <rdfs:subClassOf rdf:resource="#Bio"/>
 </owl:Class>
 
-<Metadata rdf:about="#sources/programs/act_alinhamento.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Configuration_Parameter rdf:about="#burnin">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TESTE</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-a">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-o">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">out</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-t">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aa</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#--act">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/arpa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/act_conversion.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/act_evolutive_model.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Configuration_Parameter rdf:about="#-gamma">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GAMMA_CATEGORIES</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-brn">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">burnin</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-nc">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nchains</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-ng">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ngen</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-nr">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nruns</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-prt">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">printfreq</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-rt">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rates_mrbayes</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#nchains">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#ngen">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#nruns">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#printfreq">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#rates_mrbayes">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-f">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">file</value>
-</Configuration_Parameter>
-
-<Metadata rdf:about="#sources/programs/act_treegenerator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Url rdf:about="#sources/programs/act_validation.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Configuration_Parameter rdf:about="#-OUTPUT">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OUTPUT</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-act">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">alignment</value>
-</Configuration_Parameter>
-
-<Configuration_Parameter rdf:about="#-nch">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Metadata"/>
-  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nchains</value>
-</Configuration_Parameter>
-
-<Url rdf:about="#programs/remove_pipe.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Metadata rdf:about="#sources/clustalw.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/mafft.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Url rdf:about="#sources/model_generator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/mrbayes.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/raxml.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/read_seq.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Metadata rdf:about="#sources/remove_pipe.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/act_alignment.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/act_validation.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/arpa.pyy">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeClustalw.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeClustalw_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeMafft_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeModelGenerator_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeModelgenerator_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeMrBayes_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeRaxml_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeReadSeq_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeReadseq_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/SciPhy/cgi-bin/makeRemovePipe_aa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/act_alignment.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/act_tree_generator-OLD.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/act_tree_generator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/clustalw.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/mafft.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/model_generator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/mrbayes.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/raxml.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/read_seq.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/remove_pipe.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/tree_generator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/validation.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/SciPhy/arpa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Url rdf:about="#sources/programs/SciPhy/cgi-bin/arpa.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Url>
-
-<Metadata rdf:about="#-p">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Configuration_Parameter"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/activities/act_validation.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/activities/act_alinhamento.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/activities/act_evolutive_model.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/activities/act_conversion.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/activities/act_treegenerator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
+<owl:Class rdf:about="#Equivalence">
+  <rdfs:subClassOf rdf:resource="#Entity"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasOutputRelation"/>
+      <owl:someValuesFrom>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#composedBy"/>
+          <owl:hasValue rdf:resource="#converted_alignment_att_eq"/>
+        </owl:Restriction>
+      </owl:someValuesFrom>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
 
 <Attribute rdf:about="#Input_Validation_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -813,6 +510,31 @@
   <hasRetrospectiveCall rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</hasRetrospectiveCall>
 </Program>
 
+<Url rdf:about="#sources/SciPhy/cgi-bin/arpa.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Url>
+
+<Metadata rdf:about="#-f">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+</Metadata>
+
+<Metadata rdf:about="#-t">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+</Metadata>
+
+<Metadata rdf:about="#-o">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">out</value>
+</Metadata>
+
+<Metadata rdf:about="#-a">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+</Metadata>
+
 <Abstract_activity rdf:about="#validation">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequencing_quality_control"/>
@@ -823,6 +545,16 @@
   <hasMetadata rdf:resource="#sources/activities/act_validation.py"/>
   <hasOutputRelation rdf:resource="#Rel_Validation_Out"/>
 </Abstract_activity>
+
+<Metadata rdf:about="#--act">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+</Metadata>
+
+<Metadata rdf:about="#sources/activities/act_validation.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
 
 <Attribute rdf:about="#alignment_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -839,6 +571,7 @@
   <composedBy rdf:resource="#alignment_att"/>
   <consumedBy rdf:resource="#evolutive_model"/>
   <consumedBy rdf:resource="#conversion"/>
+  <consumedBy rdf:resource="#eq_conversion"/>
   <consumedBy rdf:resource="#treegenerator"/>
   <generatedBy rdf:resource="#alinhamento"/>
 </Relation>
@@ -883,6 +616,11 @@
   <hasOutputRelation rdf:resource="#Rel_Alignment_Out"/>
 </Abstract_activity>
 
+<Metadata rdf:about="#sources/activities/act_alinhamento.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
 <Attribute rdf:about="#evolutiveModel_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#fileEvolutiveModel"/>
@@ -915,6 +653,17 @@
   <hasRetrospectiveCall rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</hasRetrospectiveCall>
 </Program>
 
+<Metadata rdf:about="#-gamma">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GAMMA_CATEGORIES</value>
+</Metadata>
+
+<Metadata rdf:about="#-p">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+</Metadata>
+
 <Abstract_activity rdf:about="#evolutive_model">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_refinament_operation_2089"/>
@@ -924,6 +673,11 @@
   <hasMetadata rdf:resource="#sources/activities/act_evolutive_model.py"/>
   <hasOutputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
 </Abstract_activity>
+
+<Metadata rdf:about="#sources/activities/act_evolutive_model.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
 
 <Attribute rdf:about="#converted_alignment_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -935,10 +689,20 @@
   <wasAssociatedWith rdf:resource="#converted_alignment_att"/>
 </Port>
 
+<Attribute rdf:about="#converted_alignment_att_eq">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Attribute>
+
 <Relation rdf:about="#Rel_Converted_Alignment_Out">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <composedBy rdf:resource="#converted_alignment_att"/>
+  <composedBy rdf:resource="#converted_alignment_att_eq"/>
   <generatedBy rdf:resource="#conversion"/>
+</Relation>
+
+<Relation rdf:about="#Rel_Converted_Alignment_Out_eq">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <generatedBy rdf:resource="#eq_conversion"/>
 </Relation>
 
 <Program rdf:about="#read_seq">
@@ -952,6 +716,7 @@
   <hasMetadata rdf:resource="#--act"/>
   <hasOutPort rdf:resource="#CONVERTED_ALIGNMENT"/>
   <implements rdf:resource="#conversion"/>
+  <implements rdf:resource="#eq_conversion"/>
   <hasRetrospectiveCall rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</hasRetrospectiveCall>
 </Program>
 
@@ -964,6 +729,26 @@
   <hasMetadata rdf:resource="#sources/activities/act_conversion.py"/>
   <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out"/>
 </Abstract_activity>
+
+<Metadata rdf:about="#sources/activities/act_conversion.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
+
+<Abstract_activity rdf:about="#eq_conversion">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Sequence_alignment_conversion_operation_0260"/>
+  <rdf:type rdf:resource="#Optional"/>
+  <executedBy rdf:resource="#read_seq"/>
+  <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
+  <hasMetadata rdf:resource="#sources/activities/act_eq_conversion.py"/>
+  <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out_eq"/>
+</Abstract_activity>
+
+<Metadata rdf:about="#sources/activities/act_eq_conversion.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
 
 <Attribute rdf:about="#phylogenomic_tree">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -1017,6 +802,42 @@
   <hasRetrospectiveCall rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</hasRetrospectiveCall>
 </Program>
 
+<Metadata rdf:about="#-nr">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nruns</value>
+</Metadata>
+
+<Metadata rdf:about="#-nc">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nchains</value>
+</Metadata>
+
+<Metadata rdf:about="#-brn">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">burnin</value>
+</Metadata>
+
+<Metadata rdf:about="#-prt">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">printfreq</value>
+</Metadata>
+
+<Metadata rdf:about="#-ng">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ngen</value>
+</Metadata>
+
+<Metadata rdf:about="#-rt">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Configuration_Parameter"/>
+  <value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rates_mrbayes</value>
+</Metadata>
+
 <Abstract_activity rdf:about="#treegenerator">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
@@ -1024,11 +845,16 @@
   <rdf:type rdf:resource="#Variant"/>
   <executedBy rdf:resource="#raxml"/>
   <executedBy rdf:resource="#mrbayes"/>
-  <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasInputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
+  <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasMetadata rdf:resource="#sources/activities/act_treegenerator.py"/>
   <hasOutputRelation rdf:resource="#Rel_Tree_Generator_Out"/>
 </Abstract_activity>
+
+<Metadata rdf:about="#sources/activities/act_treegenerator.py">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Url"/>
+</Metadata>
 
 
 </rdf:RDF>
