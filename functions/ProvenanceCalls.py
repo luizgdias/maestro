@@ -13,8 +13,10 @@ from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 
 def createProvenanceCalls(ontoexpline, abs_wf, options):
+    prospectiveProvenanceFile = open("sources/Provenance/prospectiveProvenance.py", "w")
+    retrospectiveProvenanceFile = open("sources/Provenance/retrospectiveProvenance.py", "w")
     createProspectiveCall(ontoexpline,abs_wf)
-    retrospectiveProvenanceFile = open("/home/luiz/PycharmProjects/MaestroOO/sources/Provenance/retrospectiveProvenance.py", "w")
+
 
     for aa in abs_wf:
         # aa[0] guarda as atividades, aa[1] guarda as dependências de cada atividade
@@ -37,8 +39,8 @@ def createProvenanceCalls(ontoexpline, abs_wf, options):
 
 def createProspectiveCall(ontoexpline, abs_wf):
 
-    df = "df = Dataflow('df_tag')\n\n"
-    f = open("sources/prospectiveProvenance.py", "a+")
+    df = "#df = Dataflow('df_tag')\n\n"
+    f = open("sources/Provenance/prospectiveProvenance.py", "a+")
 
     #limpando o arquivo que contém o modelo de dados de proveniência (prospectiveProvenance.py)
     if not(os.path.getsize("sources/prospectiveProvenance.py") == 0):
@@ -77,17 +79,18 @@ def createProspectiveCall(ontoexpline, abs_wf):
             for out_att in out_rel.composedBy:
                 output_attributes = output_attributes+"Attribute("+out_att.name+", AttributeType.TEXT)"
 
-        prospectiveCall = "tf_"+str(activity[0].name)+" = Transformation("+str(activity[0].name)+")\n" +\
-                          "tf_"+str(activity[0].name)+"_input = Set("+str(activity[0].name)+", SetType.INPUT,\n" +\
-                          "["+input_attributes+"])\n" + \
-                          "tf_"+str(activity[0].name)+"_output = Set("+str(activity[0].name)+", SetType.OUTPUT,\n"+\
-                          "[Attribute('Alignmt', AttributeType.TEXT),\n" +\
-                          "["+output_attributes+"])\n" + \
-                          "tf_"+str(activity[0].name)+".set_sets([tf_"+str(activity[0].name)+"_input, tf_"+str(activity[0].name)+"_output])\n" +\
-                          "df.add_transformation(tf_"+str(activity[0].name)+")\n\n"
+        prospectiveCall = "#tf_"+str(activity[0].name)+" = Transformation("+str(activity[0].name)+")\n" +\
+                          "#tf_"+str(activity[0].name)+"_input = Set("+str(activity[0].name)+", SetType.INPUT,\n" +\
+                          "#["+input_attributes+"])\n" + \
+                          "#tf_"+str(activity[0].name)+"_output = Set("+str(activity[0].name)+", SetType.OUTPUT,\n"+\
+                          "#[Attribute('Alignmt', AttributeType.TEXT),\n" +\
+                          "#["+output_attributes+"])\n" + \
+                          "#tf_"+str(activity[0].name)+".set_sets([tf_"+str(activity[0].name)+"_input, tf_"+str(activity[0].name)+"_output])\n" +\
+                          "#df.add_transformation(tf_"+str(activity[0].name)+")\n\n"
         f.write(prospectiveCall)
     f.close()
 
+#def insertProspectiveCall é usada na versão que instancia a versão concreta (com arquivos py para cada atividade)
 def insertProspectiveCall(ontoexpline, abs_wf):
 
     df = "df = Dataflow('df_tag')\n\n"
@@ -149,7 +152,7 @@ def createtRetrospectiveCall(ontoexpline, program, source):
         #procura o metadado referente ao arquivo py que vai executar a atividade e insere as chamadas de proveniencia
         # print("meta name:", source)
         # originalProgram = open(source, "r")
-        retrospectiveProvenanceFile = open("/home/luiz/PycharmProjects/MaestroOO/sources/Provenance/retrospectiveProvenance.py", "a")
+        retrospectiveProvenanceFile = open('sources/Provenance/retrospectiveProvenance.py', "a")
 
         print("|*** Inserting DfAnalyzer retrospective calls on: ", source, ". In:", os.path.basename(__file__))
         # print("|*** Using program: ", program, " to run: ", source,"\n")
@@ -182,6 +185,7 @@ def createtRetrospectiveCall(ontoexpline, program, source):
         program.hasRetrospectiveCall = [True]
         ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
 
+#def insertRetrospectiveCall é usada na versão que instancia a versão concreta (com arquivos py para cada atividade)
 def insertRetrospectiveCall(ontoexpline, program, source):
     '''Essa função separa o que é import do que é conteudo executável,
     depois de separar ela insere as chamadas de proveniencia deixando o arquivo com estrutura:
