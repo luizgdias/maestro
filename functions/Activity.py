@@ -17,10 +17,7 @@ def incrementActivityId():
     print("===> id: ", activityId)
     return activityId
 
-
-
-
-def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations, optional, implementers, first):
+def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations, optional, implementers, first, dataflow):
     global activityIdCounter
 
     for program in implementers:
@@ -62,4 +59,5 @@ def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations
     print("Activity===>", activity)
     id = incrementActivityId()
     activity.hasId = id
+    activity.belongsTo = dataflow
     return activity

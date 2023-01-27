@@ -14,6 +14,7 @@
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#belongsTo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
   <rdfs:domain rdf:resource="#Abstract_activity"/>
   <rdfs:range rdf:resource="#Experiment_Line"/>
 </owl:ObjectProperty>
@@ -466,6 +467,10 @@
   <rdfs:subClassOf rdf:resource="#Bio"/>
 </owl:Class>
 
+<Workflow rdf:about="#Experiment_1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Workflow>
+
 <Attribute rdf:about="#Input_Validation_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <wasAssociatedWith rdf:resource="#INPUT_SEQUENCE"/>
@@ -502,6 +507,7 @@
 <Program rdf:about="#remove_pipe">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequencing_quality_control"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#INPUT_SEQUENCE"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-f"/>
@@ -545,6 +551,7 @@
   <rdf:type rdf:resource="#Sequencing_quality_control"/>
   <rdf:type rdf:resource="#Mandatory"/>
   <rdf:type rdf:resource="#First"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <executedBy rdf:resource="#remove_pipe"/>
   <hasInputRelation rdf:resource="#Rel_Validation_In"/>
   <hasOutputRelation rdf:resource="#Rel_Validation_Out"/>
@@ -579,6 +586,7 @@
 <Program rdf:about="#mafft">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_operation_0292"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#VALIDATED_SEQUENCE"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-t"/>
@@ -594,6 +602,7 @@
 <Program rdf:about="#clustalw">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_operation_0292"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#VALIDATED_SEQUENCE"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-t"/>
@@ -611,6 +620,7 @@
   <rdf:type rdf:resource="#Sequence_alignment_operation_0292"/>
   <rdf:type rdf:resource="#Mandatory"/>
   <rdf:type rdf:resource="#Variant"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <executedBy rdf:resource="#mafft"/>
   <executedBy rdf:resource="#clustalw"/>
   <hasInputRelation rdf:resource="#Rel_Validation_Out"/>
@@ -638,6 +648,7 @@
 <Program rdf:about="#modelgenerator">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_refinament_operation_2089"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-gamma"/>
@@ -666,6 +677,7 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_refinament_operation_2089"/>
   <rdf:type rdf:resource="#Mandatory"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <executedBy rdf:resource="#modelgenerator"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasOutputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
@@ -701,6 +713,7 @@
 <Program rdf:about="#read_seq">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_conversion_operation_0260"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#VALIDATED_SEQUENCE"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-t"/>
@@ -718,6 +731,7 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_conversion_operation_0260"/>
   <rdf:type rdf:resource="#Optional"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <executedBy rdf:resource="#read_seq"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out"/>
@@ -728,6 +742,7 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Sequence_alignment_conversion_operation_0260"/>
   <rdf:type rdf:resource="#Optional"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <executedBy rdf:resource="#read_seq"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
   <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out_eq"/>
@@ -753,6 +768,7 @@
 <Program rdf:about="#raxml">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#fileEvolutiveModel"/>
   <hasInPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
@@ -769,8 +785,9 @@
 <Program rdf:about="#mrbayes">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
-  <hasInPort rdf:resource="#fileEvolutiveModel"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <hasInPort rdf:resource="#CONVERTED_ALIGNMENT"/>
+  <hasInPort rdf:resource="#fileEvolutiveModel"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-p"/>
   <hasMetadata rdf:resource="#-t"/>
@@ -829,6 +846,7 @@
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
   <rdf:type rdf:resource="#Mandatory"/>
   <rdf:type rdf:resource="#Variant"/>
+  <belongsTo rdf:resource="#Experiment_1"/>
   <executedBy rdf:resource="#raxml"/>
   <executedBy rdf:resource="#mrbayes"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>

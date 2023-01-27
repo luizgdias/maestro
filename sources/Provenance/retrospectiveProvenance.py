@@ -1,50 +1,50 @@
 
-#task = Task(1, dataflow_tag, taskName_remove_pipe)
+#task = Task(1, dataflowTag_Experiment_1, taskName_remove_pipe)
 #task_input = DataSet(dataflow_tag, [Element(['INPUT_SEQUENCE'])])
 #task.add_dataset(task_input)
 #task.begin()
 
-#task_output = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
+#task_output = DataSet(dataflowTag_Experiment_1, [Element(['VALIDATED_SEQUENCE'])])
 #task.add_dataset(task_output)
 #task.end()
 
 
-#task = Task(3, dataflow_tag, taskName_clustalw)
+#task = Task(3, dataflowTag_Experiment_1, taskName_clustalw)
 #task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
 #task.add_dataset(task_input)
 #task.begin()
 
-#task_output = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
+#task_output = DataSet(dataflowTag_Experiment_1, [Element(['SEQUENCES_ALIGNMENT'])])
 #task.add_dataset(task_output)
 #task.end()
 
 
-#task = Task(4, dataflow_tag, taskName_modelgenerator)
+#task = Task(4, dataflowTag_Experiment_1, taskName_modelgenerator)
 #task_input = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
 #task.add_dataset(task_input)
 #task.begin()
 
-#task_output = DataSet(dataflow_tag, [Element(['fileEvolutiveModel'])])
+#task_output = DataSet(dataflowTag_Experiment_1, [Element(['fileEvolutiveModel'])])
 #task.add_dataset(task_output)
 #task.end()
 
 
-#task = Task(5, dataflow_tag, taskName_read_seq)
+#task = Task(5, dataflowTag_Experiment_1, taskName_read_seq)
 #task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
 #task.add_dataset(task_input)
 #task.begin()
 
-#task_output = DataSet(dataflow_tag, [Element(['CONVERTED_ALIGNMENT'])])
+#task_output = DataSet(dataflowTag_Experiment_1, [Element(['CONVERTED_ALIGNMENT'])])
 #task.add_dataset(task_output)
 #task.end()
 
 
-#task = Task(7, dataflow_tag, taskName_mrbayes)
+#task = Task(7, dataflowTag_Experiment_1, taskName_mrbayes)
 #task_input = DataSet(dataflow_tag, [Element(['CONVERTED_ALIGNMENT', 'fileEvolutiveModel'])])
 #task.add_dataset(task_input)
 #task.begin()
 
-#task_output = DataSet(dataflow_tag, [Element(['fileTree'])])
+#task_output = DataSet(dataflowTag_Experiment_1, [Element(['fileTree'])])
 #task.add_dataset(task_output)
 #task.end()
 

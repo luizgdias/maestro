@@ -24,9 +24,11 @@ from functions.Metadata import *
 from functions.ConcreteDerivation import *
 from functions.AbstractWf import *
 from functions.ProvenanceCalls import *
+from functions.Experiment import *
 from sources.TemplateExecution import createTemplate
 from dfa_lib_python.dataflow import Dataflow
 
+global dataflow
 def cleanOntology(ontoexpline):
     busca = ontoexpline.search(type=ontoexpline.Experiment_Line)
     print("|*** Instancias Expline deletadas para iniciar: ", busca)
@@ -48,6 +50,8 @@ if __name__ == '__main__':
     df = Dataflow('asd')
     ontoexpline = get_ontology("ontologies/ontoexpline.owl").load()
     cleanOntology(ontoexpline)
+
+    dataflow = createExperiment(ontoexpline, "Experiment_1")
 
     # Definindo as operações de domínio EDAM
     op_validation = domainOperation(ontoexpline, "Sequencing_quality_control")
@@ -76,7 +80,7 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_validation, [sequences_validated])
 
     # criando programa
-    remove_pipe = createProgram(ontoexpline, "remove_pipe", op_validation, "sources/SciPhy/cgi-bin/arpa.py")
+    remove_pipe = createProgram(ontoexpline, "remove_pipe", op_validation, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     associateProgramPort(remove_pipe, [sequences_port], [sequences_validated_port])
     in_file = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-f")
     data_type = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-t")
@@ -92,7 +96,7 @@ if __name__ == '__main__':
 
     # criando atividade
     aa = createActivity(ontoexpline, "validation", op_validation, [rel_input_validation],
-                        [rel_output_validation], False, [remove_pipe], True)
+                        [rel_output_validation], False, [remove_pipe], True, dataflow)
     ###################################################################################################################
 
     # Atributo e porta de saida do alinhamento
@@ -108,14 +112,14 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_alignment, [alignment])
 
     # criando programa
-    mafft = createProgram(ontoexpline, "mafft", op_alignment, "sources/SciPhy/cgi-bin/arpa.py")
+    mafft = createProgram(ontoexpline, "mafft", op_alignment, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     associateProgramPort(mafft, [sequences_validated_port], [sequences_aligned_port])
     mafft.hasRetrospectiveCall = [False]
     addMetadata(ontoexpline, mafft, data_type)
     addMetadata(ontoexpline, mafft, output_dir)
     addMetadata(ontoexpline, mafft, a)
 
-    clustalw = createProgram(ontoexpline, "clustalw", op_alignment, "sources/SciPhy/cgi-bin/arpa.py")
+    clustalw = createProgram(ontoexpline, "clustalw", op_alignment, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     associateProgramPort(clustalw, [sequences_validated_port], [sequences_aligned_port])
     clustalw.hasRetrospectiveCall = [False]
     addMetadata(ontoexpline, clustalw, data_type)
@@ -128,7 +132,7 @@ if __name__ == '__main__':
 
     # criando atividade
     aa2 = createActivity(ontoexpline, "alinhamento", op_alignment, [rel_output_validation],
-                         [rel_output_alignment], False, [mafft, clustalw], False)
+                         [rel_output_alignment], False, [mafft, clustalw], False, dataflow)
 
     ###################################################################################################################
     # Atributo e porta de saida do alinhamento
@@ -144,7 +148,7 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_evolutiveModel, [evolutiveModel_att])
 
     # criando programa
-    model_generator = createProgram(ontoexpline, "modelgenerator", op_model, "sources/SciPhy/cgi-bin/arpa.py")
+    model_generator = createProgram(ontoexpline, "modelgenerator", op_model, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     associateProgramPort(model_generator, [sequences_aligned_port], [evolutiveModel_port])
     gamma_categories = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-gamma")
     gamma_categories.value = ["GAMMA_CATEGORIES"]
@@ -158,7 +162,7 @@ if __name__ == '__main__':
 
     # criando atividade
     aa3 = createActivity(ontoexpline, "evolutive_model", op_model, [rel_output_alignment],
-                         [rel_output_evolutiveModel], False, [model_generator], False)
+                         [rel_output_evolutiveModel], False, [model_generator], False, dataflow)
     ###################################################################################################################
 
     # Atributo e porta de saida do alinhamento
@@ -178,7 +182,7 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_converted_alignment, [converted_alignment_att, converted_alignment_att_eq])
 
     # criando programa
-    read_seq = createProgram(ontoexpline, "read_seq", op_conversion, "sources/SciPhy/cgi-bin/arpa.py")
+    read_seq = createProgram(ontoexpline, "read_seq", op_conversion, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     read_seq.hasRetrospectiveCall = [False]
     addMetadata(ontoexpline, read_seq, data_type)
     addMetadata(ontoexpline, read_seq, output_dir)
@@ -188,11 +192,11 @@ if __name__ == '__main__':
 
     # criando atividade
     aa4 = createActivity(ontoexpline, "conversion", op_conversion, [rel_output_alignment],
-                         [rel_output_converted_alignment], True, [read_seq], False)
+                         [rel_output_converted_alignment], True, [read_seq], False, dataflow)
 
     #criando equivalencia para teste
     aa_equivalence = createActivity(ontoexpline, "eq_conversion", op_conversion, [rel_output_alignment],
-                         [rel_output_converted_alignment_eq], True, [read_seq], False)
+                         [rel_output_converted_alignment_eq], True, [read_seq], False, dataflow)
     ###################################################################################################################
 
     # Atributo e porta de saida do alinhamento
@@ -208,13 +212,13 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_tree_generator, [tree_att])
 
     # criando programa
-    raxml = createProgram(ontoexpline, "raxml", op_tree, "sources/SciPhy/cgi-bin/arpa.py")
+    raxml = createProgram(ontoexpline, "raxml", op_tree, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     raxml.hasRetrospectiveCall = [False]
     addMetadata(ontoexpline, raxml, prog)
     addMetadata(ontoexpline, raxml, data_type)
     addMetadata(ontoexpline, raxml, output_dir)
 
-    mrbayes = createProgram(ontoexpline, "mrbayes", op_tree, "sources/SciPhy/cgi-bin/arpa.py")
+    mrbayes = createProgram(ontoexpline, "mrbayes", op_tree, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     mrbayes.hasRetrospectiveCall = [False]
     nruns = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-nr")
     nruns.value=["nruns"]
@@ -245,7 +249,7 @@ if __name__ == '__main__':
 
     # criando atividade
     aa5 = createActivity(ontoexpline, "treegenerator", op_tree, [rel_output_alignment, rel_output_evolutiveModel],
-                         [rel_output_tree_generator], False, [raxml, mrbayes], False)
+                         [rel_output_tree_generator], False, [raxml, mrbayes], False, dataflow)
     ###################################################################################################################
 
 ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
@@ -267,7 +271,7 @@ print("|*** Executing: ",os.path.basename(__file__),"\n")
 # # print("\nWF abstrato [[atividade, [dependências]]]: ",abs_wf)
 # print("** ",abs_wf)
 
-createProvenanceCalls(ontoexpline, abs_wf, [[aa2, clustalw], [aa5, mrbayes]])
+createProvenanceCalls(ontoexpline, abs_wf, dataflow, [[aa2, clustalw], [aa5, mrbayes]])
 
 # isValid(ontoexpline, [aa, aa2, aa3, aa4, aa5])
 # getAbsWf(ontoexpline, [aa, aa2, aa3, aa4, aa5])

@@ -5,7 +5,7 @@ def incrementProgramId():
     print("===> id: ", programId)
     return programId
 
-def createProgram(onto, name, operation, source):
+def createProgram(onto, name, operation, source, dataflow):
     program = onto.Program(name)
     program.is_a.append(operation)
 
@@ -13,6 +13,7 @@ def createProgram(onto, name, operation, source):
     program.hasMetadata.append(metadata_url)
     programId = incrementProgramId()
     program.hasId = programId
+    program.belongsTo = dataflow
 
     return program
 

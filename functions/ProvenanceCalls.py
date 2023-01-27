@@ -12,7 +12,8 @@ from dfa_lib_python.task import Task
 from dfa_lib_python.dataset import DataSet
 from dfa_lib_python.element import Element
 
-def createProvenanceCalls(ontoexpline, abs_wf, options):
+
+def createProvenanceCalls(ontoexpline, abs_wf, dataflow, options):
     prospectiveProvenanceFile = open("sources/Provenance/prospectiveProvenance.py", "w")
     retrospectiveProvenanceFile = open("sources/Provenance/retrospectiveProvenance.py", "w")
     createProspectiveCall(ontoexpline,abs_wf)
@@ -27,12 +28,12 @@ def createProvenanceCalls(ontoexpline, abs_wf, options):
                 for op in options:  # se a aa é variante e está dentro de op enviado via usuário, está coerente
                     if (aa[0] in op) and (op[1] in aa[0].executedBy):
                         # print(aa[0]," é variante e pode ser executada por ", op[1].name)
-                        createtRetrospectiveCall(ontoexpline, op[1], retrospectiveProvenanceFile)
+                        createtRetrospectiveCall(ontoexpline, op[1], retrospectiveProvenanceFile, dataflow)
             else:
                 # print(aa[0], "é mandatória e é executada por ",aa[0].executedBy)
                 for program in aa[0].executedBy:  # esse for é retórico, a API da ontologia sempre devolve uma lista com um elemento pra cada atividade mandatória
                     # print("\n|*** Criando template para", program.name,". In: " , os.path.basename(__file__))
-                    createtRetrospectiveCall(ontoexpline, program, retrospectiveProvenanceFile)
+                    createtRetrospectiveCall(ontoexpline, program, retrospectiveProvenanceFile, dataflow)
 
     retrospectiveProvenanceFile.close()
 
@@ -144,7 +145,7 @@ def insertProspectiveCall(ontoexpline, abs_wf):
         f.write(prospectiveCall)
     f.close()
 
-def createtRetrospectiveCall(ontoexpline, program, source):
+def createtRetrospectiveCall(ontoexpline, program, source, dataflow):
     '''Essa função separa o que é import do que é conteudo executável,
     depois de separar ela insere as chamadas de proveniencia deixando o arquivo com estrutura:
     imports, inicio da chamada de proveniencia, conteudo do script, final da chamada de proveniência.'''
@@ -164,7 +165,7 @@ def createtRetrospectiveCall(ontoexpline, program, source):
         for i in program.hasInPort:
             inports.append(i.name)
 
-        provenance_start = "#task = Task("+str(program.hasId)+", dataflow_tag, taskName_"+program.name+")\n" +\
+        provenance_start = "#task = Task("+str(program.hasId)+", dataflowTag_"+ dataflow.name +", taskName_"+program.name+")\n" +\
                 "#task_input = DataSet(dataflow_tag, [Element("+str(inports)+")])\n"+\
                 "#task.add_dataset(task_input)\n"+\
                 "#task.begin()"
@@ -175,7 +176,7 @@ def createtRetrospectiveCall(ontoexpline, program, source):
         for i in program.hasOutPort:
             outports.append(i.name)
 
-        provenance_end =    "#task_output = DataSet(dataflow_tag, [Element("+str(outports)+")])\n"+\
+        provenance_end =    "#task_output = DataSet(dataflowTag_"+ dataflow.name +", [Element("+str(outports)+")])\n"+\
                             "#task.add_dataset(task_output)\n" +\
                             "#task.end()\n"
 
