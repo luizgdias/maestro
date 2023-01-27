@@ -42,10 +42,9 @@ def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations
     if (len(implementers) > 1):
         activity.is_a.append(ontoexpline.Variant)
 
-    source = createActivityTemplate(ontoexpline, name)
-    source_url = createMetadata(ontoexpline, ontoexpline.Url, source)
-    addMetadata(ontoexpline, activity, source_url)
-
-    print("***** source: ", source)
-    # activity.hasTemplate(source)
+    # source = createActivityTemplate(ontoexpline, name)
+    # source_url = createMetadata(ontoexpline, ontoexpline.Url, source)
+    # addMetadata(ontoexpline, activity, source_url)
+    #
+    # print("***** source: ", source)
     return activity

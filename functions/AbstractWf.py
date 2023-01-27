@@ -46,7 +46,8 @@ def absWfDependences(ontoexpline, activities):
 
         abs_wf.append(act_dependences)
     # print(abs_wf)
-    print("|*** ABS Wf is: ",valid_wf,". Starting concrete instantiation... In: " , os.path.basename(__file__))
+    print("|*** ABS Wf is: ",valid_wf)
+    # print("|*** Starting concrete instantiation... In: " , os.path.basename(__file__))
     return(abs_wf)
 
 def isValid(ontoexpline, activities):

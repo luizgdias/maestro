@@ -542,18 +542,12 @@
   <rdf:type rdf:resource="#First"/>
   <executedBy rdf:resource="#remove_pipe"/>
   <hasInputRelation rdf:resource="#Rel_Validation_In"/>
-  <hasMetadata rdf:resource="#sources/activities/act_validation.py"/>
   <hasOutputRelation rdf:resource="#Rel_Validation_Out"/>
 </Abstract_activity>
 
 <Metadata rdf:about="#--act">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Configuration_Parameter"/>
-</Metadata>
-
-<Metadata rdf:about="#sources/activities/act_validation.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
 </Metadata>
 
 <Attribute rdf:about="#alignment_att">
@@ -612,14 +606,8 @@
   <executedBy rdf:resource="#mafft"/>
   <executedBy rdf:resource="#clustalw"/>
   <hasInputRelation rdf:resource="#Rel_Validation_Out"/>
-  <hasMetadata rdf:resource="#sources/activities/act_alinhamento.py"/>
   <hasOutputRelation rdf:resource="#Rel_Alignment_Out"/>
 </Abstract_activity>
-
-<Metadata rdf:about="#sources/activities/act_alinhamento.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
 
 <Attribute rdf:about="#evolutiveModel_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -670,14 +658,8 @@
   <rdf:type rdf:resource="#Mandatory"/>
   <executedBy rdf:resource="#modelgenerator"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasMetadata rdf:resource="#sources/activities/act_evolutive_model.py"/>
   <hasOutputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
 </Abstract_activity>
-
-<Metadata rdf:about="#sources/activities/act_evolutive_model.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
 
 <Attribute rdf:about="#converted_alignment_att">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -726,14 +708,8 @@
   <rdf:type rdf:resource="#Optional"/>
   <executedBy rdf:resource="#read_seq"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasMetadata rdf:resource="#sources/activities/act_conversion.py"/>
   <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out"/>
 </Abstract_activity>
-
-<Metadata rdf:about="#sources/activities/act_conversion.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
 
 <Abstract_activity rdf:about="#eq_conversion">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -741,14 +717,8 @@
   <rdf:type rdf:resource="#Optional"/>
   <executedBy rdf:resource="#read_seq"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasMetadata rdf:resource="#sources/activities/act_eq_conversion.py"/>
   <hasOutputRelation rdf:resource="#Rel_Converted_Alignment_Out_eq"/>
 </Abstract_activity>
-
-<Metadata rdf:about="#sources/activities/act_eq_conversion.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
 
 <Attribute rdf:about="#phylogenomic_tree">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -769,8 +739,8 @@
 <Program rdf:about="#raxml">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="#Phylogenetic_tree_generation_operation_0547"/>
-  <hasInPort rdf:resource="#fileEvolutiveModel"/>
   <hasInPort rdf:resource="#SEQUENCES_ALIGNMENT"/>
+  <hasInPort rdf:resource="#fileEvolutiveModel"/>
   <hasMetadata rdf:resource="#sources/SciPhy/cgi-bin/arpa.py"/>
   <hasMetadata rdf:resource="#-p"/>
   <hasMetadata rdf:resource="#-t"/>
@@ -847,14 +817,8 @@
   <executedBy rdf:resource="#mrbayes"/>
   <hasInputRelation rdf:resource="#Rel_Evolutive_Model_Out"/>
   <hasInputRelation rdf:resource="#Rel_Alignment_Out"/>
-  <hasMetadata rdf:resource="#sources/activities/act_treegenerator.py"/>
   <hasOutputRelation rdf:resource="#Rel_Tree_Generator_Out"/>
 </Abstract_activity>
-
-<Metadata rdf:about="#sources/activities/act_treegenerator.py">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <rdf:type rdf:resource="#Url"/>
-</Metadata>
 
 
 </rdf:RDF>

@@ -23,6 +23,7 @@ from functions.Relation import *
 from functions.Metadata import *
 from functions.ConcreteDerivation import *
 from functions.AbstractWf import *
+from functions.ProvenanceCalls import *
 from sources.TemplateExecution import createTemplate
 from dfa_lib_python.dataflow import Dataflow
 
@@ -259,16 +260,15 @@ ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
 
 absWf = [aa, aa2, aa3, aa4, aa5]
 x = isValid(ontoexpline, absWf)
-print("++ ",x)
-#
+
 abs_wf = absWfDependences(ontoexpline, absWf)
-print("DEPENDENCES: ", abs_wf)
+# print("DEPENDENCES: ", abs_wf)
 print("|*** Executing: ",os.path.basename(__file__),"\n")
 # #Função para retornar elementos que estão na ontologia
 # # print("\nWF abstrato [[atividade, [dependências]]]: ",abs_wf)
 # print("** ",abs_wf)
 
-absWfToConcreteWf(ontoexpline, abs_wf, [[aa2, clustalw], [aa5, mrbayes]])
+createProvenanceCalls(ontoexpline, abs_wf, [[aa2, clustalw], [aa5, mrbayes]])
 
 # isValid(ontoexpline, [aa, aa2, aa3, aa4, aa5])
 # getAbsWf(ontoexpline, [aa, aa2, aa3, aa4, aa5])
@@ -321,4 +321,4 @@ with ontoexpline:
     ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
     # close_world(Thing)
 
-    sync_reasoner()
+    sync_reasoner(infer_property_values = True)
