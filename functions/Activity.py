@@ -10,8 +10,19 @@ def createActivityTemplate(ontoexpline, activity):
     source = "sources/activities/act_"+activity+".py"
     return source
 
+activityId=0
+def incrementActivityId():
+    global activityId
+    activityId +=1
+    print("===> id: ", activityId)
+    return activityId
+
+
+
 
 def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations, optional, implementers, first):
+    global activityIdCounter
+
     for program in implementers:
         if (domainOperation in program.is_a):
             activity = ontoexpline.Abstract_activity(name)
@@ -47,4 +58,8 @@ def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations
     # addMetadata(ontoexpline, activity, source_url)
     #
     # print("***** source: ", source)
+    # incrementActivityId()
+    print("Activity===>", activity)
+    id = incrementActivityId()
+    activity.hasId = id
     return activity

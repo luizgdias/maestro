@@ -27,7 +27,6 @@ from functions.ProvenanceCalls import *
 from sources.TemplateExecution import createTemplate
 from dfa_lib_python.dataflow import Dataflow
 
-
 def cleanOntology(ontoexpline):
     busca = ontoexpline.search(type=ontoexpline.Experiment_Line)
     print("|*** Instancias Expline deletadas para iniciar: ", busca)

@@ -164,7 +164,7 @@ def createtRetrospectiveCall(ontoexpline, program, source):
         for i in program.hasInPort:
             inports.append(i.name)
 
-        provenance_start = "#task = Task(taskId, dataflow_tag, taskName_"+program.name+")\n" +\
+        provenance_start = "#task = Task("+str(program.hasId)+", dataflow_tag, taskName_"+program.name+")\n" +\
                 "#task_input = DataSet(dataflow_tag, [Element("+str(inports)+")])\n"+\
                 "#task.add_dataset(task_input)\n"+\
                 "#task.begin()"

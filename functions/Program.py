@@ -1,9 +1,18 @@
+programId=0
+def incrementProgramId():
+    global programId
+    programId +=1
+    print("===> id: ", programId)
+    return programId
+
 def createProgram(onto, name, operation, source):
     program = onto.Program(name)
     program.is_a.append(operation)
 
     metadata_url = onto.Url(source)
     program.hasMetadata.append(metadata_url)
+    programId = incrementProgramId()
+    program.hasId = programId
 
     return program
 
