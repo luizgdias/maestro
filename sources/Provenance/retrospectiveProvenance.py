@@ -19,7 +19,7 @@
 #task.end()
 
 
-#task = Task(4, dataflowTag_Experiment_1, taskName_modelgenerator)
+#task = Task(4, dataflowTag_Experiment_1, taskName_model_generator)
 #task_input = DataSet(dataflow_tag, [Element(['SEQUENCES_ALIGNMENT'])])
 #task.add_dataset(task_input)
 #task.begin()
@@ -29,7 +29,7 @@
 #task.end()
 
 
-#task = Task(5, dataflowTag_Experiment_1, taskName_read_seq)
+#task = Task(5, dataflowTag_Experiment_1, taskName_readseq)
 #task_input = DataSet(dataflow_tag, [Element(['VALIDATED_SEQUENCE'])])
 #task.add_dataset(task_input)
 #task.begin()

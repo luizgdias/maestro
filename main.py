@@ -25,6 +25,7 @@ from functions.ConcreteDerivation import *
 from functions.AbstractWf import *
 from functions.ProvenanceCalls import *
 from functions.Experiment import *
+from maestro_analysis import find_data_tranformation_telemetry_metrics, find_program_telemetry_metrics
 from sources.TemplateExecution import createTemplate
 from dfa_lib_python.dataflow import Dataflow
 
@@ -41,7 +42,9 @@ def cleanOntology(ontoexpline):
     # print(busca)
     for individual in busca:
         destroy_entity(individual)
-        # print(individual)
+        print(individual)
+    ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
+
 
 
 # Press the green button in the gutter to run the script.
@@ -49,7 +52,7 @@ if __name__ == '__main__':
 
     df = Dataflow('asd')
     ontoexpline = get_ontology("ontologies/ontoexpline.owl").load()
-    cleanOntology(ontoexpline)
+    # cleanOntology(ontoexpline)
 
     dataflow = createExperiment(ontoexpline, "Experiment_1")
 
@@ -148,7 +151,7 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_evolutiveModel, [evolutiveModel_att])
 
     # criando programa
-    model_generator = createProgram(ontoexpline, "modelgenerator", op_model, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
+    model_generator = createProgram(ontoexpline, "model_generator", op_model, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     associateProgramPort(model_generator, [sequences_aligned_port], [evolutiveModel_port])
     gamma_categories = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-gamma")
     gamma_categories.value = ["GAMMA_CATEGORIES"]
@@ -182,7 +185,7 @@ if __name__ == '__main__':
     associateRelationAtt(rel_output_converted_alignment, [converted_alignment_att, converted_alignment_att_eq])
 
     # criando programa
-    read_seq = createProgram(ontoexpline, "read_seq", op_conversion, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
+    read_seq = createProgram(ontoexpline, "readseq", op_conversion, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
     read_seq.hasRetrospectiveCall = [False]
     addMetadata(ontoexpline, read_seq, data_type)
     addMetadata(ontoexpline, read_seq, output_dir)
@@ -325,3 +328,22 @@ with ontoexpline:
     # close_world(Thing)
 
     sync_reasoner(infer_property_values = True)
+
+
+# eq = ontoexpline.Abstract_activity()
+eq = ontoexpline.search(type = ontoexpline.Equivalence)
+print(eq)
+print(aa4, aa4.is_a)
+
+# find_data_tranformation_telemetry_metrics(26)
+find_program_telemetry_metrics(raxml, ontoexpline)
+find_program_telemetry_metrics(mafft, ontoexpline)
+find_program_telemetry_metrics(clustalw, ontoexpline)
+find_program_telemetry_metrics(mrbayes, ontoexpline)
+find_program_telemetry_metrics(model_generator, ontoexpline)
+
+
+
+
+
+
