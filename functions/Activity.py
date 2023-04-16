@@ -10,12 +10,12 @@ def createActivityTemplate(ontoexpline, activity):
     source = "sources/activities/act_"+activity+".py"
     return source
 
-activityId=0
-def incrementActivityId():
-    global activityId
-    activityId +=1
-    print("===> id: ", activityId)
-    return activityId
+# activityId=0
+# def incrementActivityId():
+#     global activityId
+#     activityId +=1
+#     print("===> id: ", activityId)
+#     return activityId
 
 def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations, optional, implementers, first, dataflow):
     global activityIdCounter
@@ -57,7 +57,7 @@ def createActivity(ontoexpline, name, domainOperation, inRelations, outRelations
     # print("***** source: ", source)
     # incrementActivityId()
     print("Activity===>", activity)
-    id = incrementActivityId()
-    activity.hasId = id
+    # id = incrementActivityId()
+    # activity.hasId = id
     activity.belongsTo = dataflow
     return activity

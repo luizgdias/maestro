@@ -3,14 +3,18 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for functions, files, tool windows, actions, and settings.
 import os
+import statistics
 
 import owlready2
+import xds as xds
 from owlready2 import *
 import subprocess
 import os, sys, re, shutil as sh, optparse, time, datetime, threading
 import sys, random, string, psutil, subprocess, json
 import getopt
 from optparse import OptionParser
+
+from psutil._common import bytes2human
 
 from functions.AbstractExpLine import *
 from functions.Activity import createActivity
@@ -25,7 +29,8 @@ from functions.ConcreteDerivation import *
 from functions.AbstractWf import *
 from functions.ProvenanceCalls import *
 from functions.Experiment import *
-from maestro_analysis import find_data_tranformation_telemetry_metrics, find_program_telemetry_metrics
+from maestro_analysis import find_data_tranformation_telemetry_metrics, find_program_telemetry_metrics, search_data, \
+    indirect_search
 from sources.TemplateExecution import createTemplate
 from dfa_lib_python.dataflow import Dataflow
 
@@ -76,7 +81,7 @@ if __name__ == '__main__':
     rel_output_validation = createRelation(ontoexpline, "Rel_Validation_Out")
 
     # associações de itens abstratos e concretos
-    associatePortAtt(sequences_port, sequences_input)  # associando att na porta
+    # associatePortAtt(sequences_port, sequences_input)  # associando att na porta
     associatePortAtt(sequences_validated_port, sequences_validated)  # associando att na porta
 
     associateRelationAtt(rel_input_validation, [sequences_input])
@@ -140,19 +145,22 @@ if __name__ == '__main__':
     ###################################################################################################################
     # Atributo e porta de saida do alinhamento
     evolutiveModel_att = createAttribute(ontoexpline, "evolutiveModel_att")  # atributo sequencia de entrada
-    evolutiveModel_port = createPort(ontoexpline, "fileEvolutiveModel")  # arquivo consumido pelo programa
-
+    data_transformation_execution_att = createAttribute(ontoexpline, "data_transformation_execution_id_2023_att")  # atributo sequencia de entrada
+    evolutiveModel_port = createPort(ontoexpline, "model")  # arquivo consumido pelo programa
+    data_transformation_execution_port = createPort(ontoexpline, "data_transformation_execution_id_2023_port")
     # relações de I/O
-    rel_output_evolutiveModel = createRelation(ontoexpline, "Rel_Evolutive_Model_Out")
+    rel_output_evolutiveModel = createRelation(ontoexpline, "ds_omodelgeneratormodule_raxml")
 
     # associações de itens abstratos e concretos
     associatePortAtt(evolutiveModel_att, evolutiveModel_port)  # associando att na porta
+    associatePortAtt(data_transformation_execution_att, data_transformation_execution_port)  # associando att na porta
 
-    associateRelationAtt(rel_output_evolutiveModel, [evolutiveModel_att])
+
+    associateRelationAtt(rel_output_evolutiveModel, [evolutiveModel_att, data_transformation_execution_att])
 
     # criando programa
     model_generator = createProgram(ontoexpline, "model_generator", op_model, "sources/SciPhy/cgi-bin/arpa.py", dataflow)
-    associateProgramPort(model_generator, [sequences_aligned_port], [evolutiveModel_port])
+    associateProgramPort(model_generator, [sequences_aligned_port], [evolutiveModel_port, data_transformation_execution_port])
     gamma_categories = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-gamma")
     gamma_categories.value = ["GAMMA_CATEGORIES"]
     prog = createMetadata(ontoexpline, ontoexpline.Configuration_Parameter, "-p")
@@ -327,7 +335,7 @@ with ontoexpline:
     ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
     # close_world(Thing)
 
-    sync_reasoner(infer_property_values = True)
+    # sync_reasoner(infer_property_values = True)
 
 
 # eq = ontoexpline.Abstract_activity()
@@ -336,13 +344,46 @@ print(eq)
 print(aa4, aa4.is_a)
 
 # find_data_tranformation_telemetry_metrics(26)
-find_program_telemetry_metrics(raxml, ontoexpline)
-find_program_telemetry_metrics(mafft, ontoexpline)
-find_program_telemetry_metrics(clustalw, ontoexpline)
-find_program_telemetry_metrics(mrbayes, ontoexpline)
-find_program_telemetry_metrics(model_generator, ontoexpline)
+# find_program_telemetry_metrics(read_seq, ontoexpline)
+# find_program_telemetry_metrics(mafft, ontoexpline)
+# find_program_telemetry_metrics(clustalw, ontoexpline)
 
+# find_program_telemetry_metrics(mrbayes, ontoexpline)
+# find_program_telemetry_metrics(raxml, ontoexpline)
+# ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
 
+# find_program_telemetry_metrics(model_generator, ontoexpline)
+#Program and (memoryUsageAverage some xsd:int[>6])
+# with ontoexpline:
+#     search = ontoexpline.search(type=ontoexpline.Program and ontoexpline.Phylogenetic_tree_generation_operation_0547)
+#     program_list = []
+#     for program in search:
+#         if program.memoryUsageAverage:
+#             metric = float(program.memoryUsageAverage)
+#             program_list.append(metric)
+#             print("programa na lista: ", program, " memory average: ", program.memoryUsageAverage)
+#     print(program_list)
+#     print(statistics.median(program_list))
+#     for program in search:
+#         if program.memoryUsageAverage and (float(program.memoryUsageAverage) < statistics.median(program_list)):
+#             print("O programa ", program," é recomendado pois consome menor memoria que a média. \nMédia: ", bytes2human(statistics.median(program_list)), "\nMemoria consumida: ", bytes2human(program.memoryUsageAverage))
+#             with ontoexpline:
+#                 class Recomended(ontoexpline.Entity):
+#                     recomended = [ontoexpline.Program and ontoexpline.memoryUsageAverage.value(program.memoryUsageAverage)]
+#                 # recomended = [ontoexpline.Program and (ontoexpline.memoryUsageAverage.some(value.xsd.float < float(6)))]
+#                 ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
+#
+#         # class Recomended(ontoexpline.Entity):
+#     #     equivalent_to = [ontoexpline.Abstract_activity and (ontoexpline.hasInputRelation.some(ontoexpline.Relation and ontoexpline.composedBy.value(ontoexpline.alignment_att))) and (ontoexpline.hasOutputRelation.some(ontoexpline.Relation and ontoexpline.composedBy.value(converted_alignment_att_eq)))]
+#     #
+#     # ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
+#     # close_world(Thing)
+#
+#     # sync_reasoner(infer_property_values = True)
+
+indirect_search(ontoexpline, op_model, parameters={'attribute': evolutiveModel_att, 'port_value': 'RtREV'})
+#quais entradas geram um atributo não relacionado a ela: Quais arquivos validados geram o modelo evolutivo RtREV?
+# indirect_search(ontoexpline, op_validation, attributes={"model": "RtREV"})
 
 
 

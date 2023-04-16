@@ -23,7 +23,7 @@
 #[Attribute(alignment_att, AttributeType.TEXT)])
 #tf_evolutive_model_output = Set(evolutive_model, SetType.OUTPUT,
 #[Attribute('Alignmt', AttributeType.TEXT),
-#[Attribute(evolutiveModel_att, AttributeType.TEXT)])
+#[Attribute(evolutiveModel_att, AttributeType.TEXT)Attribute(data_transformation_execution_id_2023_att, AttributeType.TEXT)])
 #tf_evolutive_model.set_sets([tf_evolutive_model_input, tf_evolutive_model_output])
 #df.add_transformation(tf_evolutive_model)
 
@@ -38,7 +38,7 @@
 
 #tf_treegenerator = Transformation(treegenerator)
 #tf_treegenerator_input = Set(treegenerator, SetType.INPUT,
-#[Attribute(alignment_att, AttributeType.TEXT)Attribute(evolutiveModel_att, AttributeType.TEXT)])
+#[Attribute(alignment_att, AttributeType.TEXT)Attribute(evolutiveModel_att, AttributeType.TEXT)Attribute(data_transformation_execution_id_2023_att, AttributeType.TEXT)])
 #tf_treegenerator_output = Set(treegenerator, SetType.OUTPUT,
 #[Attribute('Alignmt', AttributeType.TEXT),
 #[Attribute(phylogenomic_tree, AttributeType.TEXT)])
