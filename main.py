@@ -30,7 +30,7 @@ from functions.AbstractWf import *
 from functions.ProvenanceCalls import *
 from functions.Experiment import *
 from maestro_analysis import find_data_tranformation_telemetry_metrics, find_program_telemetry_metrics, search_data, \
-    indirect_search
+    search_by_domain_operation
 from sources.TemplateExecution import createTemplate
 from dfa_lib_python.dataflow import Dataflow
 
@@ -264,7 +264,7 @@ if __name__ == '__main__':
     ###################################################################################################################
 
 ontoexpline.save(file="ontologies/ontoexpline.owl", format="rdfxml")
-# showExpLine() #está ok
+showExpLine() #está ok
 # abstractDerivationByOptionality(ontoexpline) #está ok, ainda não plota o gráfico
 
 # createTemplate(ontoexpline, remove_pipe) #está ok, insere chamadas retrospectiva nos scripts - inserir essas chamadas na função de derivação
@@ -381,7 +381,7 @@ print(aa4, aa4.is_a)
 #
 #     # sync_reasoner(infer_property_values = True)
 
-indirect_search(ontoexpline, op_model, parameters={'attribute': evolutiveModel_att, 'port_value': 'RtREV'})
+search_by_domain_operation(ontoexpline, op_model, parameters={'attribute': evolutiveModel_att, 'port_value': 'JTT'})
 #quais entradas geram um atributo não relacionado a ela: Quais arquivos validados geram o modelo evolutivo RtREV?
 # indirect_search(ontoexpline, op_validation, attributes={"model": "RtREV"})
 
